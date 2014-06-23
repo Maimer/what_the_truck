@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 20140623194028) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "foodtrucks", force: true do |t|
+  create_table "food_trucks", force: true do |t|
     t.string "name",        null: false
     t.text   "description", null: false
   end
 
-  add_index "foodtrucks", ["name"], name: "index_foodtrucks_on_name", unique: true, using: :btree
+  add_index "food_trucks", ["name"], name: "index_food_trucks_on_name", unique: true, using: :btree
 
 end

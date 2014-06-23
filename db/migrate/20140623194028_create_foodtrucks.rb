@@ -1,9 +1,9 @@
 class CreateFoodtrucks < ActiveRecord::Migration
   def change
-    create_table :foodtrucks do |t|
+    create_table :food_trucks do |t|
       t.string :name, null: false
       t.text :description, null: false
     end
-    add_index :foodtrucks, :name, unique: true
+    add_index :food_trucks, :name, unique: true
   end
 end

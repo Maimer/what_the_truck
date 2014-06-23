@@ -13,10 +13,10 @@ feature 'user adds a new truck', %Q{
 
     truck = FoodTruck.new(truck_attrs)
 
-    visit new_foodtruck_path
+    visit new_food_truck_path
 
-    fill_in 'Food Truck Name', with: truck.name
-    fill_in 'Food Truck Description', with: truck.description
+    fill_in 'Name', with: truck.name
+    fill_in 'Description', with: truck.description
     click_on 'Submit'
 
     expect(page).to have_content truck.name
@@ -31,12 +31,12 @@ feature 'user adds a new truck', %Q{
 
     truck = FoodTruck.new(truck_attrs)
 
-    visit new_foodtruck_path
+    visit new_food_truck_path
 
-    fill_in 'Food Truck Description', with: truck.description
+    fill_in 'Description', with: truck.description
     click_on 'Submit'
 
-    expect(page).to have_content("Your food truck couldn't be saved")
+    expect(page).to have_content("Your food truck was not succesfully submitted")
   end
 
   scenario 'user enters blank information for food truck' do
@@ -49,10 +49,10 @@ feature 'user adds a new truck', %Q{
 
     truck.save
 
-    visit new_foodtruck_path
+    visit new_food_truck_path
 
-    fill_in 'Food Truck Name', with: truck.name
-    fill_in 'Food Truck Description', with: truck.description
+    fill_in 'Name', with: truck.name
+    fill_in 'Description', with: truck.description
     click_on 'Submit'
 
     expect(page).to have_content("This food truck already exists")
