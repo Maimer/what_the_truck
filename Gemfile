@@ -30,6 +30,7 @@ gem 'devise'
 gem 'simple_form'
 
 group :development, :test do
+  gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'pry-rails'

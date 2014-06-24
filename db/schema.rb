@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20140624172945) do
     t.integer  "food_truck_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|
