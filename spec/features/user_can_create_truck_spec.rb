@@ -6,12 +6,7 @@ feature 'user adds a new truck', %Q{
 } do
 
   scenario 'user adds a new food truck' do
-    truck_attrs = {
-      name: 'Chicken & Rice Guys',
-      description: 'Chicken and Rice by the pound'
-    }
-
-    truck = FoodTruck.new(truck_attrs)
+    truck = FactoryGirl.build(:food_truck)
 
     visit new_food_truck_path
 
@@ -21,15 +16,11 @@ feature 'user adds a new truck', %Q{
 
     expect(page).to have_content truck.name
     expect(page).to have_content truck.description
+    expect(page).to_not have_content("Add A Food Truck")
   end
 
   scenario 'user enters blank information for food truck' do
-    truck_attrs = {
-      name: 'Chicken & Rice Guys',
-      description: 'Chicken and Rice by the pound'
-    }
-
-    truck = FoodTruck.new(truck_attrs)
+    truck = FactoryGirl.build(:food_truck)
 
     visit new_food_truck_path
 
@@ -40,14 +31,7 @@ feature 'user adds a new truck', %Q{
   end
 
   scenario 'user enters blank information for food truck' do
-    truck_attrs = {
-      name: 'Chicken & Rice Guys',
-      description: 'Chicken and Rice by the pound'
-    }
-
-    truck = FoodTruck.new(truck_attrs)
-
-    truck.save
+    truck = FactoryGirl.create(:food_truck)
 
     visit new_food_truck_path
 

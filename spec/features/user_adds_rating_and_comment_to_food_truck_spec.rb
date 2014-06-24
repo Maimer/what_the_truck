@@ -6,28 +6,27 @@ feature 'user adds a review', %Q{
 } do
 
   scenario 'user adds a new truck review' do
-    truck_attrs = {
-      name: 'Chicken & Rice Guys',
-      description: 'Chicken and Rice by the pound'
-    }
-
-    truck = FoodTruck.create(truck_attrs)
-
-    review_attrs = {
-      rating: '5',
-      body: 'Good Stuff.'
-    }
-
-    review = Review.new(review_attrs)
-
-    visit food_truck_path(truck)
+    review = FactoryGirl.create(:review)
+    visit food_truck_path(review.food_truck)
 
     fill_in 'Rating', with: review.rating
     fill_in 'Body', with: review.body
     click_on 'Submit'
 
-    expect(page).to have_content truck.name
+    expect(page).to have_content review.food_truck.name
     expect(page).to have_content review.rating
     expect(page).to have_content review.body
+  end
+
+  scenario 'user fails to add truck review' do
+    truck = FactoryGirl.create(:food_truck)
+
+    visit food_truck_path(truck)
+
+    fill_in 'Rating', with: ''
+    fill_in 'Body', with: ''
+    click_on 'Submit'
+
+    expect(page).to have_content("Your review was not succesfully submitted")
   end
 end
