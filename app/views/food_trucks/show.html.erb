@@ -19,7 +19,7 @@
   <%= f.submit 'Submit' %>
 <% end %>
 
-<% @reviews.each do |r| %>
+<% @food_truck.reviews.each do |r| %>
   <%= r.rating %>
   <%= r.body %>
 <% end %>
