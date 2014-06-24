@@ -1,4 +1,7 @@
 class FoodTrucksController < ApplicationController
+
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @food_trucks = FoodTruck.all
   end

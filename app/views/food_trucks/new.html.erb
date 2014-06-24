@@ -1,16 +1,8 @@
 <h3>Add A Food Truck</h3>
 
-<%= form_for @food_truck do |f| %>
-
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description, col: 40, rows: 5 %>
-  </div>
-
-  <%= f.submit 'Submit' %>
+<%= simple_form_for(@food_truck) do |f| %>
+  <%= f.input :name %>
+  <%= f.description :description %>
+  <%= f.website :website %>
+  <%= f.button :submit %>
 <% end %>
