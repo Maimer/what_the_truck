@@ -1,3 +1,25 @@
 <%= @food_truck.name %>
 
 <%= @food_truck.description %>
+
+<h3>Add A Review</h3>
+
+<%= form_for [@food_truck, @review] do |f| %>
+
+  <div>
+    <%= f.label :rating %>
+    <%= f.text_field :rating %>
+  </div>
+
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body, col: 40, rows: 5 %>
+  </div>
+
+  <%= f.submit 'Submit' %>
+<% end %>
+
+<% @food_truck.reviews.each do |r| %>
+  <%= r.rating %>
+  <%= r.body %>
+<% end %>
