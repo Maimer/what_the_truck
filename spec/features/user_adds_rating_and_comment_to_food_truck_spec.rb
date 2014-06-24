@@ -6,19 +6,10 @@ feature 'user adds a review', %Q{
 } do
 
   scenario 'user adds a new truck review' do
-    truck_attrs = {
-      name: 'Chicken & Rice Guys',
-      description: 'Chicken and Rice by the pound'
-    }
 
-    truck = FoodTruck.create(truck_attrs)
+    truck = FactoryGirl.create(:food_truck)
 
-    review_attrs = {
-      rating: '5',
-      body: 'Good Stuff.'
-    }
-
-    review = Review.new(review_attrs)
+    review = FactoryGirl.create(:review)
 
     visit food_truck_path(truck)
 

@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :review do
-    user_id "1"
+    # user_id "1"
     food_truck_id "1"
+    rating "5"
     body "A review of our Test Name truck"
   end
 end
