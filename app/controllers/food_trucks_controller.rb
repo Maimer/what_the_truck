@@ -20,11 +20,10 @@ class FoodTrucksController < ApplicationController
     else
       if @food_truck.errors.messages[:name][0] == "can't be blank"
         flash.now[:notice] = "Your food truck was not succesfully submitted."
-        render :new
       elsif @food_truck.errors.messages[:name][0] == "has already been taken"
         flash.now[:notice] = "This food truck already exists."
-        render :new
       end
+      render :new
     end
   end
 

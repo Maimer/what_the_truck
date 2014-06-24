@@ -16,6 +16,7 @@ feature 'user adds a new truck', %Q{
 
     expect(page).to have_content truck.name
     expect(page).to have_content truck.description
+    expect(page).to_not have_content("Add A Food Truck")
   end
 
   scenario 'user enters blank information for food truck' do

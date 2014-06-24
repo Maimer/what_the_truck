@@ -21,4 +21,16 @@ feature 'user adds a review', %Q{
     expect(page).to have_content review.rating
     expect(page).to have_content review.body
   end
+
+  scenario 'user fails to add truck review' do
+    truck = FactoryGirl.create(:food_truck)
+
+    visit food_truck_path(truck)
+
+    fill_in 'Rating', with: ''
+    fill_in 'Body', with: ''
+    click_on 'Submit'
+
+    expect(page).to have_content("Your review was not succesfully submitted")
+  end
 end
