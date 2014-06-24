@@ -48,6 +48,8 @@ food_trucks = [{name: "Baja Taco Truck", description: "Features amazing tacos, b
                {name: "Zo Authentic Gyros", description: "A few years back while visiting Greece and sampling some authentic Gyros, we discovered the great taste that was centuries in the making, but not for sale in the Boston Metro area. After being in the restaurant business for years, we knew that authentic Greek cuisine would be embraced by businessmen, tourists and foodies alike. Come discover a new taste and why it’s worth the trip. It’s Zo Good!", website: "http://www.zoboston.com/"}]
 
 food_trucks.each do |info|
-  FoodTruck.create(info)
+  if !FoodTruck.exists?(info)
+    FoodTruck.create!(info)
+  end
 end
 
