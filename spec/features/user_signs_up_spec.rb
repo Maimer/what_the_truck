@@ -24,6 +24,8 @@ I want to be able to create an account so that I can log in to the site
 
     expect(page).to have_content("Sign in successful")
     expect(page).to have_content("Sign Out")
+    expect(page).to have_content('Harold')
+    expect(page).to have_content('Bendegas')
   end
 
   scenario 'registration info not supplied' do
