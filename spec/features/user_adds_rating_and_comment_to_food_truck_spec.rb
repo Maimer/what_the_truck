@@ -6,18 +6,14 @@ feature 'user adds a review', %Q{
 } do
 
   scenario 'user adds a new truck review' do
-
-    truck = FactoryGirl.create(:food_truck)
-
     review = FactoryGirl.create(:review)
-
-    visit food_truck_path(truck)
+    visit food_truck_path(review.food_truck)
 
     fill_in 'Rating', with: review.rating
     fill_in 'Body', with: review.body
     click_on 'Submit'
 
-    expect(page).to have_content truck.name
+    expect(page).to have_content review.food_truck.name
     expect(page).to have_content review.rating
     expect(page).to have_content review.body
   end
