@@ -10,7 +10,7 @@
   <%= f.button :submit %>
 <% end %>
 
-<% @reviews.each do |r| %>
+<% @food_truck.reviews.each do |r| %>
   <%= r.rating %>
   <%= r.body %>
 <% end %>
