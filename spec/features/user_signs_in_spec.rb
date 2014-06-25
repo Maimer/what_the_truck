@@ -12,7 +12,7 @@ I want to be able to sign in to my account
     click_link 'Sign In'
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
-    click_button 'Sign In'
+    click_button 'Sign in'
 
     expect(page).to have_content("Welcome")
     expect(page).to have_content("Sign Out")
@@ -20,34 +20,39 @@ I want to be able to sign in to my account
 
   scenario 'user enters nonexistent login credentials' do
     visit root_path
+
     click_link 'Sign In'
     fill_in 'Email', with: 'notanemail@nope.com'
     fill_in 'Password', with: 'password'
-    click_button 'Sign In'
+    click_button 'Sign in'
 
-
-    expect(page).to have_content('Invalid email')
+    expect(page).to have_content('Invalid email or password')
     expect(page).to_not have_content('Welcome')
     expect(page).to_not have_content('Sign Out')
   end
 
   scenario 'existing user enters incorrect password' do
     user = FactoryGirl.create(:user)
+
     visit root_path
+
     click_link 'Sign In'
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'notthepassword'
-    click_button 'Sign In'
+    click_button 'Sign in'
 
-    expect(page).to have_content('Invalid password')
+    expect(page).to have_content('Invalid email or password')
     expect(page).to_not have_content('Sign Out')
   end
 
-  scenario 'authenticatec user cannot re-sign in' do
+  scenario 'authenticated user cannot re-sign in' do
     user = FactoryGirl.create(:user)
+
     visit new_user_session_path
+
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
+    click_button 'Sign in'
 
     expect(page).to have_content('Sign Out')
     expect(page).to_not have_content('Sign In')
