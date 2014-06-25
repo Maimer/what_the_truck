@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-      <div class="container-fluid">
+      <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -20,32 +20,17 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to 'Add a truck', new_food_truck_path %>
+            <li><%= link_to 'Add a truck', new_food_truck_path %></li>
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
-
-
-            <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="form-inputs">
-                <%= f.input :email, required: true, label: false %>
-                <%= f.input :password, required: true, label: false %>
-                <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-              </div>
-            <% end %>
-
-
-
-
             <% if user_signed_in? %>
-              <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+              <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
             <% else %>
               <li><%= link_to "Sign In", new_user_session_path %></li>
               <li><%= link_to "Sign Up", new_user_registration_path %></li>
             <% end %>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </div>
