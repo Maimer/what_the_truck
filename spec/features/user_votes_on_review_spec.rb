@@ -1,8 +1,4 @@
 require 'rails_helper'
-require 'spec_helper'
-
-include Warden::Test::Helpers
-Warden.test_mode!
 
 feature 'user votes on a review', %Q{
 As a food truck aficionado
@@ -19,9 +15,15 @@ additionally I want to be able to change my vote
 
 scenario 'user upvotes a review' do
   user = FactoryGirl.create(:user)
-  review = FactoryGirl.create(:review)
 
-  login_as(user, scope: :user)
+  visit new_user_session_path
+
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: user.password
+
+  click_button 'Sign in'
+
+  review = FactoryGirl.create(:review)
 
   visit food_truck_path(review.food_truck)
 
@@ -34,9 +36,15 @@ end
 
 scenario 'user downvotes a review' do
   user = FactoryGirl.create(:user)
-  review = FactoryGirl.create(:review)
 
-  login_as(user, scope: :user)
+  visit new_user_session_path
+
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: user.password
+
+  click_button 'Sign in'
+
+  review = FactoryGirl.create(:review)
 
   visit food_truck_path(review.food_truck)
 
@@ -50,9 +58,15 @@ end
 
 scenario 'user changes vote' do
   user = FactoryGirl.create(:user)
-  review = FactoryGirl.create(:review)
 
-  login_as(user, scope: :user)
+  visit new_user_session_path
+
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: user.password
+
+  click_button 'Sign in'
+
+  review = FactoryGirl.create(:review)
 
   visit food_truck_path(review.food_truck)
 
@@ -63,7 +77,7 @@ scenario 'user changes vote' do
   expect(page).to have_link('Upvote')
   expect(page).to_not have_link('Downvote')
   expect(page).to have_content('Downvotes: 1')
-  expect(page).to have_content('Upvotes: 1')
+  expect(page).to have_content('Upvotes: 0')
 end
 
 end
