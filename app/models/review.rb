@@ -20,4 +20,12 @@ class Review < ActiveRecord::Base
     self.votes_count = upvote_count - downvote_count
     save
   end
+
+  after_create do
+    current = self.food_truck.average_rating *
+    (self.food_truck.reviews.count - 1)
+    current += self.rating
+    self.food_truck.average_rating = current /
+    self.food_truck.reviews.count
+  end
 end
