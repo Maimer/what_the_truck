@@ -12,4 +12,8 @@ class FoodTruck < ActiveRecord::Base
       0
     end
   end
+
+  def self.search(query)
+    where("to_tsvector(name) || ' ' || to_tsvector(description) @@ plainto_tsquery(?)", query)
+  end
 end
