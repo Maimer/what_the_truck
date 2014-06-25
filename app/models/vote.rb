@@ -10,17 +10,20 @@ class Vote < ActiveRecord::Base
     count = 0
     self.vote == "up" ? count = 1 : count = -1
     self.review.votes_count += count
+    self.review.save
   end
 
   def after_change_vote
     count = 0
     self.vote == "up" ? count = 2 : count = -2
     self.review.votes_count += count
+    self.review.save
   end
 
   def after_destroy
     count = 0
     self.vote == "up" ? count = 1 : count = -1
     self.review.votes_count -= count
+    self.review.save
   end
 end
