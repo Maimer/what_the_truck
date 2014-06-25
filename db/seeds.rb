@@ -1,10 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+FoodTruck.delete_all
+User.delete_all
+Review.delete_all
+Vote.delete_all
+
+num = 20
+
+num.times do |i|
+  User.create({
+    first_name: Randgen.first_name(length: rand(7) + 4),
+    last_name: Randgen.last_name(length: rand(8) + 5),
+    email: "seed#{i+1}@seeds.com",
+    password: "seeder123",
+    password_confirmation: "seeder123"
+  })
+end
 
 food_trucks = [{name: "Baja Taco Truck", description: "Features amazing tacos, burritos and tostadas made with Carne Asada, chicken and fish prepared as it is in Baja.", website: "http://bajatacotruck.com/"},
                {name: "Benny's Crepe Cafe", description: "New England's best traveling Crepe Cafe. Named after owner Frank Shear's grandfather Benny, they provide nutritious and fun breakfasts and lunches for business people along Route 128 and in Boston. In addition to their truck they also cater parties and corporate luncheons.", website: "http://www.bennyscrepecafe.com/"},
@@ -48,6 +57,7 @@ food_trucks = [{name: "Baja Taco Truck", description: "Features amazing tacos, b
                {name: "Zo Authentic Gyros", description: "A few years back while visiting Greece and sampling some authentic Gyros, we discovered the great taste that was centuries in the making, but not for sale in the Boston Metro area. After being in the restaurant business for years, we knew that authentic Greek cuisine would be embraced by businessmen, tourists and foodies alike. Come discover a new taste and why it’s worth the trip. It’s Zo Good!", website: "http://www.zoboston.com/"}]
 
 food_trucks.each do |info|
+  info[:user_id] = User.pluck(:id).sample
   if !FoodTruck.exists?(info)
     FoodTruck.create!(info)
   end

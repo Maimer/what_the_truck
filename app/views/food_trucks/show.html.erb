@@ -1,16 +1,37 @@
-<%= @food_truck.name %>
+<h2><%= @food_truck.name %></h2>
 
-<%= @food_truck.description %>
+<%= link_to @food_truck.website, @food_truck.website %><br><br>
 
-<h3>Add A Review</h3>
+<%= @food_truck.description %><br>
 
-<%= simple_form_for([@food_truck, @review]) do |f| %>
-  <%= f.input :rating %>
-  <%= f.input :body %>
-  <%= f.button :submit %>
+<% if user_signed_in? %>
+
+  <h3>Add A Review</h3>
+
+  <%= simple_form_for([@food_truck, @review]) do |f| %>
+    <%= f.input :rating %>
+    <%= f.input :body %>
+    <%= f.button :submit %>
+  <% end %>
 <% end %>
 
-<% @food_truck.reviews.each do |r| %>
-  <%= r.rating %>
+<br><br>
+
+<% @reviews.each do |r| %>
+  Posted by: <%= r.user.first_name + " " + r.user.last_name %><br>
+  Created at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
+  Upvotes: <%= r.votes.where(vote: 'up').count %> / Downvotes:
+  <%= r.votes.where(vote: 'down').count %><br>
+  Rating: <% r.rating.to_i.times do %>&#9733; <% end %><br>
   <%= r.body %>
+  <br>
+  <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
+    Upvote / <%= link_to "Downvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
+  <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
+    <%= link_to "Upvote", review_votes_path(@food_truck, r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> / Downvote
+  <% else %>
+    <%= link_to "Upvote", review_votes_path(@food_truck, r, vote: { vote: "up" } ), method: :post %> /
+    <%= link_to "Downvote", review_votes_path(@food_truck, r, vote: { vote: "down" } ), method: :post %>
+  <% end %>
+  <br><br>
 <% end %>
