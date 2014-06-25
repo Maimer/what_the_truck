@@ -3,12 +3,13 @@ class FoodTrucksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @food_trucks = FoodTruck.all
+    @food_trucks = FoodTruck.all #sort by review?
   end
 
   def show
     @food_truck = FoodTruck.find(params[:id])
     @review = Review.new
+    @reviews = @food_truck.reviews.order(votes_count: :desc)
   end
 
   def new
@@ -27,6 +28,19 @@ class FoodTrucksController < ApplicationController
         flash.now[:notice] = "This food truck already exists."
       end
       render :new
+    end
+  end
+
+  def destroy
+    food_truck = FoodTruck.find(params[:id])
+    if current_user.admin || current_user.id == food_truck.user_id
+      if food_truck.destroy
+        flash[:notice] = "Successfully deleted food truck."
+        redirect_to root_path
+      end
+    else
+      flash[:alert] = "Failed to remove food truck."
+      render :show
     end
   end
 
