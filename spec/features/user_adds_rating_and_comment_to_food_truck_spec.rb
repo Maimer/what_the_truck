@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative 'helper'
 
 feature 'user adds a review', %Q{
   As a food truck aficionado
@@ -6,12 +7,15 @@ feature 'user adds a review', %Q{
 } do
 
   scenario 'user adds a new truck review' do
-    review = FactoryGirl.create(:review)
+    review = FactoryGirl.build(:review)
+
+    create_user_and_sign_in
+
     visit food_truck_path(review.food_truck)
 
     fill_in 'Rating', with: review.rating
     fill_in 'Body', with: review.body
-    click_on 'Submit'
+    click_on 'Create Review'
 
     expect(page).to have_content review.food_truck.name
     expect(page).to have_content review.rating
@@ -21,11 +25,13 @@ feature 'user adds a review', %Q{
   scenario 'user fails to add truck review' do
     truck = FactoryGirl.create(:food_truck)
 
+    create_user_and_sign_in
+
     visit food_truck_path(truck)
 
     fill_in 'Rating', with: ''
     fill_in 'Body', with: ''
-    click_on 'Submit'
+    click_on 'Create Review'
 
     expect(page).to have_content("Your review was not succesfully submitted")
   end
