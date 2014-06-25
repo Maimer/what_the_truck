@@ -9,7 +9,7 @@ class FoodTrucksController < ApplicationController
   def show
     @food_truck = FoodTruck.find(params[:id])
     @review = Review.new
-    @reviews = @food_truck.reviews #order by upvote count
+    @reviews = @food_truck.reviews.order(:votes_count)
   end
 
   def new
@@ -29,6 +29,10 @@ class FoodTrucksController < ApplicationController
       end
       render :new
     end
+  end
+
+  def destroy
+
   end
 
   private

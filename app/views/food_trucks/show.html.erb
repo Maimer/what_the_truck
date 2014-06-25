@@ -24,5 +24,14 @@
   <%= r.votes.where(vote: 'down').count %><br>
   Rating: <% r.rating.to_i.times do %>&#9733; <% end %><br>
   <%= r.body %>
+  <br>
+  <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
+    Upvote / <%= link_to "Downvote", food_truck_review_vote_path(@food_truck, r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :patch %>
+  <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
+    <%= link_to "Upvote", food_truck_review_vote_path(@food_truck, r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :patch %> / Downvote
+  <% else %>
+    <%= link_to "Upvote", food_truck_review_votes_path(@food_truck, r, vote: { vote: "up" } ), method: :post %> /
+    <%= link_to "Downvote", food_truck_review_votes_path(@food_truck, r, vote: { vote: "down" } ), method: :post %>
+  <% end %>
   <br><br>
 <% end %>
