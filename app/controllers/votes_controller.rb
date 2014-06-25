@@ -20,10 +20,6 @@ class VotesController < ApplicationController
     redirect_to @review.food_truck
   end
 
-  def destroy
-    Vote.find(params[:id]).destroy
-  end
-
   private
 
   def vote_params
