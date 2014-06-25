@@ -1,8 +1,10 @@
-<h3>Add A Food Truck</h3>
 
-<%= simple_form_for(@food_truck) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.button :submit, value: 'Create Food Truck' %>
+
+<%= simple_form_for(@food_truck, html: {class: 'form-signin'}) do |f| %>
+  <h3>Add A Food Truck</h3>
+  <%= f.input :name, required: true, input_html: {class: 'form-control'} %>
+  <%= f.input :description, required: true, input_html: {class: 'form-control'} %>
+  <br>
+  <%= f.button :submit, value: 'Create Food Truck', class: 'btn btn-lg btn-primary btn-block' %>
 
 <% end %>
