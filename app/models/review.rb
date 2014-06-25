@@ -27,5 +27,6 @@ class Review < ActiveRecord::Base
     current += self.rating
     self.food_truck.average_rating = current /
     self.food_truck.reviews.count
+    self.food_truck.save
   end
 end
