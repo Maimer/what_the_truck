@@ -7,19 +7,53 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">What The Truck?</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><%= link_to 'Add a truck', new_food_truck_path %>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+                <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+              <% else %>
+                <li><%= link_to "Sign In", new_user_session_path %></li>
+                <li><%= link_to "Sign Up", new_user_registration_path %></li>
+              <% end %>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </div>
 
-<% if user_signed_in? %>
-  <%= link_to "Sign Out", destroy_user_session_path %>
-<% else %>
-  <%= link_to "Sign In", new_user_session_path %> / <%= link_to "Sign Up", new_user_registration_path %>
-<% end %>
+  <div class="container">
+    <% if flash.any? %>
+      <div class="alert alert-info">
+        <strong>
+          <%= flash[:notice] %>
+          <%= flash[:alert] %>
+        </strong>
+      </div>
+    <% end %>
 
-<% if flash.any? %>
-  <%= flash[:notice] %>
-  <br>
-<% end %>
+    <div class="main">
 
-<%= yield %>
+      <%= yield %>
+
+    </div>
+
+  </div>
 
 </body>
 </html>
