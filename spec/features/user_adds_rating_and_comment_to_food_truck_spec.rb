@@ -6,10 +6,12 @@ feature 'user adds a review', %Q{
   I want to be able to add a food truck to be reviewed
 } do
 
+  before(:each) do
+    create_user_and_sign_in
+  end
+
   scenario 'user adds a new truck review' do
     review = FactoryGirl.build(:review)
-
-    create_user_and_sign_in
 
     visit food_truck_path(review.food_truck)
 
@@ -24,8 +26,6 @@ feature 'user adds a review', %Q{
 
   scenario 'user fails to add truck review' do
     truck = FactoryGirl.create(:food_truck)
-
-    create_user_and_sign_in
 
     visit food_truck_path(truck)
 
