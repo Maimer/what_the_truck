@@ -23,6 +23,25 @@
             <li><%= link_to 'Add a truck', new_food_truck_path %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+
+
+
+
+            <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="form-inputs">
+                <%= f.input :email, required: true, autofocus: true, label: false %>
+                <%= f.input :password, required: true, label: false %>
+                <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+              </div>
+
+              <div class="form-actions">
+                <%= f.button :submit, "Sign in" %>
+              </div>
+            <% end %>
+
+
+
+
             <% if user_signed_in? %>
                 <li><%= link_to "Sign Out", destroy_user_session_path %></li>
               <% else %>
