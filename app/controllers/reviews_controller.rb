@@ -5,7 +5,8 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @food_truck = FoodTruck.find(params[:food_truck_id])
-    @review.food_truck_id = @food_truck.id
+    @review.food_truck = @food_truck
+    @review.user = current_user
 
     if @review.save
       redirect_to @food_truck
