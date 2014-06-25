@@ -7,12 +7,19 @@ feature 'user adds a new truck', %Q{
 
   scenario 'user adds a new food truck' do
     truck = FactoryGirl.build(:food_truck)
+    user = FactoryGirl.create(:user)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_on 'Sign in'
 
     visit new_food_truck_path
 
     fill_in 'Name', with: truck.name
     fill_in 'Description', with: truck.description
-    click_on 'Submit'
+    click_on 'Create Food Truck'
 
     expect(page).to have_content truck.name
     expect(page).to have_content truck.description
@@ -21,23 +28,37 @@ feature 'user adds a new truck', %Q{
 
   scenario 'user enters blank information for food truck' do
     truck = FactoryGirl.build(:food_truck)
+    user = FactoryGirl.create(:user)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_on 'Sign in'
 
     visit new_food_truck_path
 
     fill_in 'Description', with: truck.description
-    click_on 'Submit'
+    click_on 'Create Food Truck'
 
     expect(page).to have_content("Your food truck was not succesfully submitted")
   end
 
   scenario 'user enters blank information for food truck' do
     truck = FactoryGirl.create(:food_truck)
+    user = FactoryGirl.create(:user)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_on 'Sign in'
 
     visit new_food_truck_path
 
     fill_in 'Name', with: truck.name
     fill_in 'Description', with: truck.description
-    click_on 'Submit'
+    click_on 'Create Food Truck'
 
     expect(page).to have_content("This food truck already exists")
   end

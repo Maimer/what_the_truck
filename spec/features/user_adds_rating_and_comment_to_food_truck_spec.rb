@@ -6,12 +6,20 @@ feature 'user adds a review', %Q{
 } do
 
   scenario 'user adds a new truck review' do
+    user = FactoryGirl.create(:user)
     review = FactoryGirl.create(:review)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_on 'Sign in'
+
     visit food_truck_path(review.food_truck)
 
     fill_in 'Rating', with: review.rating
     fill_in 'Body', with: review.body
-    click_on 'Submit'
+    click_on 'Create Review'
 
     expect(page).to have_content review.food_truck.name
     expect(page).to have_content review.rating
@@ -20,12 +28,19 @@ feature 'user adds a review', %Q{
 
   scenario 'user fails to add truck review' do
     truck = FactoryGirl.create(:food_truck)
+    user = FactoryGirl.create(:user)
+
+    visit new_user_session_path
+
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_on 'Sign in'
 
     visit food_truck_path(truck)
 
     fill_in 'Rating', with: ''
     fill_in 'Body', with: ''
-    click_on 'Submit'
+    click_on 'Create Review'
 
     expect(page).to have_content("Your review was not succesfully submitted")
   end
