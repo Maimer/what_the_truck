@@ -7,13 +7,8 @@ feature 'user adds a new truck', %Q{
 
   scenario 'user adds a new food truck' do
     truck = FactoryGirl.build(:food_truck)
-    user = FactoryGirl.create(:user)
 
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Sign in'
+    create_user_and_sign_in
 
     visit new_food_truck_path
 
@@ -28,13 +23,8 @@ feature 'user adds a new truck', %Q{
 
   scenario 'user enters blank information for food truck' do
     truck = FactoryGirl.build(:food_truck)
-    user = FactoryGirl.create(:user)
 
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Sign in'
+    create_user_and_sign_in
 
     visit new_food_truck_path
 
@@ -46,13 +36,8 @@ feature 'user adds a new truck', %Q{
 
   scenario 'user enters blank information for food truck' do
     truck = FactoryGirl.create(:food_truck)
-    user = FactoryGirl.create(:user)
 
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Sign in'
+    create_user_and_sign_in
 
     visit new_food_truck_path
 

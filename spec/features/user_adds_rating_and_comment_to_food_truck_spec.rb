@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative 'helper'
 
 feature 'user adds a review', %Q{
   As a food truck aficionado
@@ -6,14 +7,9 @@ feature 'user adds a review', %Q{
 } do
 
   scenario 'user adds a new truck review' do
-    user = FactoryGirl.create(:user)
-    review = FactoryGirl.create(:review)
+    review = FactoryGirl.build(:review)
 
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Sign in'
+    create_user_and_sign_in
 
     visit food_truck_path(review.food_truck)
 
@@ -28,13 +24,8 @@ feature 'user adds a review', %Q{
 
   scenario 'user fails to add truck review' do
     truck = FactoryGirl.create(:food_truck)
-    user = FactoryGirl.create(:user)
 
-    visit new_user_session_path
-
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    click_on 'Sign in'
+    create_user_and_sign_in
 
     visit food_truck_path(truck)
 
