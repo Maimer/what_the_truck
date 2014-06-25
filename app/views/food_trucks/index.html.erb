@@ -1,9 +1,7 @@
 <% @food_trucks.each do |food_truck| %>
   <%= link_to food_truck.name, food_truck %> -
-  <% if food_truck.reviews.size > 0 %>
-    <% (food_truck.reviews.pluck(:rating).sum / food_truck.reviews.size).to_i.times do %>
+    <% food_truck.average_rating.times do %>
       &#9733;
     <% end %>
-  <% end %>
   <br>
 <% end %>
