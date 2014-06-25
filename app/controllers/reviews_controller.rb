@@ -17,7 +17,12 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    @food_truck = review.food_truck
+    @review = Review.find(params[:id])
+    @review.votes.destroy_all
+    @review.destroy
 
+    redirect_to @food_truck
   end
 
   private

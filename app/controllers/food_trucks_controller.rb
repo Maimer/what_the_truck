@@ -32,7 +32,11 @@ class FoodTrucksController < ApplicationController
   end
 
   def destroy
+    @food_truck = FoodTruck.find(params[:id])
+    @food_truck.reviews.destroy_all
+    @food_truck.destroy
 
+    redirect_to '/'
   end
 
   private
