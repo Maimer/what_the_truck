@@ -8,11 +8,13 @@ feature 'user adds a new truck', %Q{
   scenario 'user adds a new food truck' do
     truck = FactoryGirl.build(:food_truck)
 
+    create_user_and_sign_in
+
     visit new_food_truck_path
 
     fill_in 'Name', with: truck.name
     fill_in 'Description', with: truck.description
-    click_on 'Submit'
+    click_on 'Create Food Truck'
 
     expect(page).to have_content truck.name
     expect(page).to have_content truck.description
@@ -22,10 +24,12 @@ feature 'user adds a new truck', %Q{
   scenario 'user enters blank information for food truck' do
     truck = FactoryGirl.build(:food_truck)
 
+    create_user_and_sign_in
+
     visit new_food_truck_path
 
     fill_in 'Description', with: truck.description
-    click_on 'Submit'
+    click_on 'Create Food Truck'
 
     expect(page).to have_content("Your food truck was not succesfully submitted")
   end
@@ -33,11 +37,13 @@ feature 'user adds a new truck', %Q{
   scenario 'user enters blank information for food truck' do
     truck = FactoryGirl.create(:food_truck)
 
+    create_user_and_sign_in
+
     visit new_food_truck_path
 
     fill_in 'Name', with: truck.name
     fill_in 'Description', with: truck.description
-    click_on 'Submit'
+    click_on 'Create Food Truck'
 
     expect(page).to have_content("This food truck already exists")
   end
