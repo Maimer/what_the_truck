@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :food_trucks, only: [:index, :show, :new, :create, :destroy] do
-    resources :reviews, only: [:create, :destroy] do
-      resources :votes, only: [:create, :update, :destroy]
-    end
+    resources :reviews, only: [:create, :destroy]
+  end
+
+  resources :reviews, only: [] do
+    resources :votes, only: [:create, :destroy]
   end
 end

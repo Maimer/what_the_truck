@@ -6,24 +6,7 @@ class Vote < ActiveRecord::Base
   validates :review_id, presence: true
   validates :vote, inclusion: { in: ["none", "up", "down"] }
 
-  after_create do
-    count = 0
-    self.vote == "up" ? count = 1 : count = -1
-    self.review.votes_count += count
-    self.review.save
-  end
-
-  after_update do
-    count = 0
-    self.vote == "up" ? count = 2 : count = -2
-    self.review.votes_count += count
-    self.review.save
-  end
-
-  before_destroy do
-    count = 0
-    self.vote == "up" ? count = 1 : count = -1
-    self.review.votes_count -= count
-    self.review.save
+  after_save do
+    review.cache_vote_count
   end
 end
