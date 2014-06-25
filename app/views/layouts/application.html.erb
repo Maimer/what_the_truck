@@ -25,8 +25,6 @@
           <ul class="nav navbar-nav navbar-right">
 
 
-
-
             <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
               <div class="form-inputs">
                 <%= f.input :email, required: true, autofocus: true, label: false %>
@@ -43,11 +41,11 @@
 
 
             <% if user_signed_in? %>
-                <li><%= link_to "Sign Out", destroy_user_session_path %></li>
-              <% else %>
-                <li><%= link_to "Sign In", new_user_session_path %></li>
-                <li><%= link_to "Sign Up", new_user_registration_path %></li>
-              <% end %>
+              <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+            <% else %>
+              <li><%= link_to "Sign In", new_user_session_path %></li>
+              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            <% end %>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">

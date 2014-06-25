@@ -15,23 +15,21 @@ I want to be able to create an account so that I can log in to the site
   scenario 'user inputs valid and required information' do
     visit root_path
     click_link 'Sign Up'
-    fill_in 'First Name', with: 'Harold'
-    fill_in 'Last Name', with: 'Bendegas'
+    fill_in 'First name', with: 'Harold'
+    fill_in 'Last name', with: 'Bendegas'
     fill_in 'Email', with: 'user@bendegas.com'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password Confirmation', with: 'password'
-    click_button 'Sign Up'
+    fill_in 'Password', with: 'password', match: :prefer_exact
+    fill_in 'Password confirmation', with: 'password', match: :prefer_exact
+    click_button 'Sign up'
 
-    expect(page).to have_content("Sign in successful")
     expect(page).to have_content("Sign Out")
-    expect(page).to have_content('Harold')
-    expect(page).to have_content('Bendegas')
+    expect(page).to have_content("Welcome! You have signed up successfully.")
   end
 
   scenario 'registration info not supplied' do
     visit root_path
     click_link 'Sign Up'
-    click_button 'Sign Up'
+    click_button 'Sign up'
 
     expect(page).to have_content("can't be blank")
     expect(page).to_not have_content("Sign Out")
@@ -40,12 +38,12 @@ I want to be able to create an account so that I can log in to the site
   scenario 'password does not match confirmation' do
     visit root_path
     click_link 'Sign Up'
-    fill_in 'First Name', with: 'Harold'
-    fill_in 'Last Name', with: 'Bendegas'
+    fill_in 'First name', with: 'Harold'
+    fill_in 'Last name', with: 'Bendegas'
     fill_in 'Email', with: 'user@bendegas.com'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password Confirmation', with: 'notthepassword'
-    click_button 'Sign Up'
+    fill_in 'Password', with: 'password', match: :prefer_exact
+    fill_in 'Password confirmation', with: 'notthepassword', match: :prefer_exact
+    click_button 'Sign up'
 
     expect(page).to have_content("doesn't match")
     expect(page).to_not have_content("Sign Out")
