@@ -1,6 +1,6 @@
 <% @food_trucks.each do |food_truck| %>
   <%= link_to food_truck.name, food_truck %> -
-    <% food_truck.average_rating.times do %>
+    <% food_truck.average_rating.ceil.times do %>
       &#9733;
     <% end %>
   <br>
