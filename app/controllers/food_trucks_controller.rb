@@ -4,10 +4,11 @@ class FoodTrucksController < ApplicationController
 
   def index
     if params[:search]
-      @food_trucks = FoodTruck.search(params[:search][:query]).order(average_rating: :desc)
+      @food_trucks = FoodTruck.search(params[:search][:query])
     else
-      @food_trucks = FoodTruck.order(average_rating: :desc)
+      @food_trucks = FoodTruck.all
     end
+    @food_trucks = @food_trucks.order(average_rating: :desc)
   end
 
   def show
