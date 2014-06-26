@@ -176,3 +176,38 @@ User.pluck(:id).each do |user|
     end
   end
 end
+
+Review.pluck(:id).each do |review|
+  User.pluck(:id).each do |user|
+
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
