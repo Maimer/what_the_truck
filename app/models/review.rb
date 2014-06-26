@@ -8,6 +8,7 @@ class Review < ActiveRecord::Base
     less_than_or_equal_to: 5
     }, allow_nil: false
 
+     paginates_per 10
 
   def upvote_count
     votes.where(vote: 'up').count

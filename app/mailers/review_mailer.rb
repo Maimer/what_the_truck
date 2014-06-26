@@ -3,7 +3,7 @@ class ReviewMailer < ActionMailer::Base
 
   def new_review_email(review)
     @review = review
-    @food_truck = @review.food_truck
+    @food_truck = FoodTruck.find(@review.food_truck_id)
     @user = User.find(@food_truck.user_id)
 
     mail(to: @user.email, subject: "New review on #{@food_truck.name}!")
