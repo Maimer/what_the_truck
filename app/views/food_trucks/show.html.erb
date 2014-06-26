@@ -2,20 +2,9 @@
 
 <%= link_to @food_truck.website, @food_truck.website %><br><br>
 
-<%= @food_truck.description %><br>
+<%= @food_truck.description %><br><br>
 
-<% if user_signed_in? %>
-
-  <h3>Add A Review</h3>
-
-  <%= simple_form_for([@food_truck, @review]) do |f| %>
-    <%= f.input :rating %>
-    <%= f.input :body %>
-    <%= f.button :submit %>
-  <% end %>
-<% end %>
-
-<br><br>
+<%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck) %><br><br>
 
 <% @reviews.each do |r| %>
   Posted by: <%= r.user.first_name + " " + r.user.last_name %><br>
