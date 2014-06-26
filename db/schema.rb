@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140625195849) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140625195849) do
     t.string   "website"
     t.integer  "user_id",                      null: false
     t.float    "average_rating", default: 0.0
+
   end
 
   add_index "food_trucks", ["name"], name: "index_food_trucks_on_name", unique: true, using: :btree

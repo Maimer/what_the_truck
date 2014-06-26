@@ -5,10 +5,12 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @food_truck = FoodTruck.find(params[:food_truck_id])
-    @review.food_truck = @food_truck
-    @review.user = current_user
+
+    @review.food_truck_id = @food_truck.id
+    @user = @review.food_truck.user
 
     if @review.save
+      ReviewMailer.new_review_email(@user).deliver
       redirect_to @food_truck
     else
       flash.now[:notice] = "Your review was not succesfully submitted."
