@@ -29,4 +29,8 @@ class Review < ActiveRecord::Base
   def send_email
     ReviewMailer.new_review_email(self).deliver
   end
+
+  def send_review_conf_email
+    ReviewMailer.your_review_email(self).deliver
+  end
 end

@@ -18,9 +18,11 @@ class ReviewsController < ApplicationController
 
     @review.food_truck_id = @food_truck.id
     @user = @review.food_truck.user
+    @current_user = current_user
 
     if @review.save
       ReviewMailer.new_review_email(@user).deliver
+      ReviewMailer.your_review_email(@current_user).deliver
       redirect_to @food_truck
     else
       flash.now[:notice] = "Your review was not succesfully submitted."
