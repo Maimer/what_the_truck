@@ -29,6 +29,7 @@ class Review < ActiveRecord::Base
     self.food_truck.average_rating = current /
     self.food_truck.reviews.count
     self.food_truck.save
+  end
 
   def send_email
     ReviewMailer.new_review_email(self).deliver
