@@ -22,11 +22,6 @@ class Review < ActiveRecord::Base
   end
 
   after_create do
-    current = self.food_truck.average_rating *
-    (self.food_truck.reviews.count - 1)
-    current += self.rating
-    self.food_truck.average_rating = current /
-    self.food_truck.reviews.count
-    self.food_truck.save
+    self.food_truck.update_average_rating(self.rating)
   end
 end
