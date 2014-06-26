@@ -3,21 +3,13 @@ class VotesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @review = Review.find(params[:review_id])
-    @vote = Vote.new(vote_params)
-    @vote.review = @review
-    @vote.user = current_user
-    @vote.save
+    review = Review.find(params[:review_id])
+    vote = Vote.find_by(review: review, user: current_user)
+    vote ||= Vote.new(review: review, user: current_user)
+    vote.assign_attributes(vote_params)
+    vote.save
 
-    redirect_to @review.food_truck
-  end
-
-  def update
-    @vote = Vote.find(params[:id])
-    @review = Review.find(params[:review_id])
-    @vote.update(vote: params[:vote][:vote])
-
-    redirect_to @review.food_truck
+    redirect_to review.food_truck
   end
 
   private

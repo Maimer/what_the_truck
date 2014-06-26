@@ -20,4 +20,8 @@ class Review < ActiveRecord::Base
     self.votes_count = upvote_count - downvote_count
     save
   end
+
+  after_create do
+    self.food_truck.update_average_rating(self.rating)
+  end
 end

@@ -21,7 +21,9 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><%= link_to 'Add a truck', new_food_truck_path %></li>
-
+            <li><%= simple_form_for :search, url: food_trucks_path(:index), method: :get do |f|%>
+                <%= f.input :query %>
+                <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>

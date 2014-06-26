@@ -3,7 +3,12 @@ class FoodTrucksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @food_trucks = FoodTruck.all #sort by review?
+    if params[:search]
+      @food_trucks = FoodTruck.search(params[:search][:query])
+    else
+      @food_trucks = FoodTruck.all
+    end
+    @food_trucks = @food_trucks.order(average_rating: :desc)
   end
 
   def show
