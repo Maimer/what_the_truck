@@ -8,7 +8,7 @@ num = 40
 num.times do |i|
   User.create({
     first_name: Randgen.first_name(length: rand(7) + 4),
-    last_name: Randgen.last_name(length: rand(8) + 5),
+    last_name: Randgen.last_name(length: rand(7) + 4),
     email: "seed#{i+1}@seeds.com",
     password: "seeder123",
     password_confirmation: "seeder123"
@@ -177,9 +177,12 @@ User.pluck(:id).each do |user|
   end
 end
 
-Review.pluck(:id).each do |review|
-  User.pluck(:id).each do |user|
-
+User.pluck(:id).each do |user|
+  Review.pluck(:id).sample(Review.all.count / (rand(4) + 2)).each do |review|
+    rand(10) > 2 ? vote = "up" : vote = "down"
+    if !Vote.exists?(user_id: user, review_id: review, vote: vote)
+      Vote.create!(user_id: user, review_id: review, vote: vote)
+    end
   end
 end
 
