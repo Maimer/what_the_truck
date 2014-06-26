@@ -4,9 +4,10 @@ class ReviewsController < ApplicationController
 
   def new
     @food_truck = FoodTruck.find(params[:food_truck_id])
-    if !@food_truck.reviews.where(user_id: current_user)
+    if !@food_truck.reviews.where(user: current_user)
       @review = Review.new
     else
+      flash[:notice] = "You have already reviewed this food truck!"
       redirect_to @food_truck
     end
   end
