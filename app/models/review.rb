@@ -6,4 +6,8 @@ class Review < ActiveRecord::Base
     greater_than_or_equal_to: 1,
     less_than_or_equal_to: 5
     }, allow_nil: false
+
+  def send_email
+    ReviewMailer.new_review_email(self).deliver
+  end
 end
