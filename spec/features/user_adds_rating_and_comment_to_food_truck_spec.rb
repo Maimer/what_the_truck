@@ -7,7 +7,7 @@ feature 'user adds a review', %Q{
 } do
 
   before(:each) do
-    create_user_and_sign_in
+    user = create_user_and_sign_in
   end
 
   scenario 'user adds a new truck review' do
