@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative 'helper'
 
 feature 'user adds a new truck', %Q{
   As a food truck aficionado
@@ -10,16 +11,15 @@ feature 'user adds a new truck', %Q{
   end
 
   scenario 'user adds a new food truck' do
-    truck = FactoryGirl.build(:food_truck)
 
     visit new_food_truck_path
 
-    fill_in 'Name', with: truck.name
-    fill_in 'Description', with: truck.description
+    fill_in 'Name', with: 'purple'
+    fill_in 'Description', with: 'purple foods'
     click_on 'Create Food Truck'
 
-    expect(page).to have_content truck.name
-    expect(page).to have_content truck.description
+    expect(page).to have_content 'purple'
+    expect(page).to have_content 'purple foods'
     expect(page).to_not have_content("Add A Food Truck")
   end
 

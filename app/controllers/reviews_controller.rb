@@ -4,11 +4,11 @@ class ReviewsController < ApplicationController
 
   def new
     @food_truck = FoodTruck.find(params[:food_truck_id])
-    if !@food_truck.reviews.where(user_id: current_user)
+    # if !@food_truck.reviews.where(user_id: current_user)
       @review = Review.new
-    else
-      redirect_to @food_truck
-    end
+    # else
+    #   redirect_to @food_truck
+    # end
   end
 
   def create
