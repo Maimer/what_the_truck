@@ -57,8 +57,9 @@ food_trucks = [{name: "Baja Taco Truck", description: "Features amazing tacos, b
                {name: "Wow Barbecue", description: "Founded on July 1st 2013, Wow Barbecue began serving authentic Chinese Barbecue (food on a stick) on the streets of Boston in a bright red food truck. Along with 10 other partners, Wow Barbecue was founded and currently managed by Babson College MBA graduate Steve Liu. Most recently Wow Barbecue has expanded into two food trucks and opened a brick and mortar restaurant in the city of Malden, MA. Our mission is to introduce this delicious, and totally foreign food to the city of Boston and furthermore to provide a taste of home for all Chinese nationals working and studying in the area.", website: "http://www.wowbarbecue.com/"},
                {name: "Zo Authentic Gyros", description: "A few years back while visiting Greece and sampling some authentic Gyros, we discovered the great taste that was centuries in the making, but not for sale in the Boston Metro area. After being in the restaurant business for years, we knew that authentic Greek cuisine would be embraced by businessmen, tourists and foodies alike. Come discover a new taste and why it’s worth the trip. It’s Zo Good!", website: "http://www.zoboston.com/"}]
 
-food_trucks.each do |info|
+food_trucks.each_with_index do |info, i|
   info[:user_id] = User.pluck(:id).sample
+  info[:truck_photo] = File.open(File.join(Rails.root, "/food_truck_images/#{i}.jpg")))
   if !FoodTruck.exists?(info)
     FoodTruck.create!(info)
   end

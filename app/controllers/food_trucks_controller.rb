@@ -38,22 +38,9 @@ class FoodTrucksController < ApplicationController
     end
   end
 
-  def destroy
-    food_truck = FoodTruck.find(params[:id])
-    if current_user.admin || current_user.id == food_truck.user_id
-      if food_truck.destroy
-        flash[:notice] = "Successfully deleted food truck."
-        redirect_to root_path
-      end
-    else
-      flash[:alert] = "Failed to remove food truck."
-      render :show
-    end
-  end
-
   private
 
   def food_truck_params
-    params.require(:food_truck).permit(:name, :website, :description)
+    params.require(:food_truck).permit(:name, :website, :description, :truck_photo)
   end
 end

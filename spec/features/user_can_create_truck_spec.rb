@@ -16,10 +16,12 @@ feature 'user adds a new truck', %Q{
 
     fill_in 'Name', with: truck.name
     fill_in 'Description', with: truck.description
+    attach_file('Truck photo', 'spec/fixtures/icecream.jpg')
     click_on 'Create Food Truck'
 
     expect(page).to have_content truck.name
     expect(page).to have_content truck.description
+    expect(page).to have_image truck.truck_photo
     expect(page).to_not have_content("Add A Food Truck")
   end
 

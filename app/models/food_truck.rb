@@ -6,6 +6,8 @@ class FoodTruck < ActiveRecord::Base
   validates :description, presence: true
   validates :user_id, presence: true
 
+  mount_uploader :truck_photo, TruckPhotoUploader
+
   def self.search(query)
     where("to_tsvector(name) || ' ' || to_tsvector(description) @@ plainto_tsquery(?)", query)
   end
