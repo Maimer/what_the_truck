@@ -24,10 +24,12 @@
 
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= simple_form_for :search, url: food_trucks_path(:index), html: {class: 'navbar-form'}, method: :get do |f|%>
+            <li>
+              <%= simple_form_for :search, url: food_trucks_path(:index), html: {class: 'navbar-form'}, method: :get do |f| %>
               <%= f.input :query, placeholder: "Search Trucks", label: false, input_html: { class:
             'form-control'} %>
-            <% end %></li>
+              <% end %>
+            </li>
             <% if user_signed_in? %>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
             <% else %>
