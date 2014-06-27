@@ -24,6 +24,8 @@ class FoodTrucksController < ApplicationController
   def create
     @food_truck = FoodTruck.new(food_truck_params)
 
+    @food_truck.user_id = current_user.id
+
     if @food_truck.save
       redirect_to @food_truck
     else
@@ -52,6 +54,6 @@ class FoodTrucksController < ApplicationController
   private
 
   def food_truck_params
-    params.require(:food_truck).permit(:name, :description)
+    params.require(:food_truck).permit(:name, :website, :description)
   end
 end
