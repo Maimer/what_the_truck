@@ -29,6 +29,8 @@ scenario 'user upvotes a review' do
 
   click_link 'Upvote'
 
+  save_and_open_page
+
   expect(page).to have_link('Downvote')
   expect(page).to_not have_link('Upvote')
   expect(page).to have_content('Upvotes: 1')
