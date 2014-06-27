@@ -64,6 +64,14 @@ food_trucks.each do |info|
   end
 end
 
+truck_photos = Dir.entries("#{Rails.root}/food_truck_images")
+truck_photos.shift(2)
+
+FoodTruck.all.each_with_index do |truck, i|
+  truck.truck_photo.store!(File.open(File.join(Rails.root, "/food_truck_images/#{truck_photos[i]}")))
+  truck.save!
+end
+
 reviews = [{description: "Yum!  Bacon Bit Sammich was amazing.  I like the uniqueness of this truck and that they focus on a few great items.  Staff was friendly and efficient."},
            {description: "I wasn't impressed as I thought I would be! Yes, the dumplings were delicious, but I was hoping to get more of the food truck experience they offer and try a few items. Its harder to do that at the store, because all items are $7+ and it can add up quickly. However, they had some creative options available that all sounded good, and I love the space. So, I'll bump this place up to four, but I prefer the truck."},
            {description: "We had their food truck 'cater' our 6/14/14 wedding and it was amazing... All our guests loved the uniqueness of the menu and also loved the locally sourced food aspect!"},
@@ -166,22 +174,22 @@ reviews = [{description: "Yum!  Bacon Bit Sammich was amazing.  I like the uniqu
            {description: "Delicious pizza. Today was my second time going to this food truck and both times I was so happy with my pizza. I got the pepperoni pizza again, it was just so good the first time that I had to have it again. I love that it's ground peperoni instead of the sliced peperoni.  The buffalo chicken pizza looks so good. That's what I'll be trying next week and I feel confident that I'll love it."},
            {description: "It's really astounding you can get pizza this delicious from a food truck! I tried the pepperoni and the buffalo chicken and everything was fantastic. The crust was especially delicious - not too crispy, not too chewy. This is the best pizza I've had in Boston!"}]
 
-User.pluck(:id).each do |user|
-  num = rand(20) + 5
-  FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
-    descriptions = reviews.sample(num)
-    rating = rand(5) + 1
-    if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
-      Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
-    end
-  end
-end
+# User.pluck(:id).each do |user|
+#   num = rand(20) + 5
+#   FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
+#     descriptions = reviews.sample(num)
+#     rating = rand(5) + 1
+#     if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+#       Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+#     end
+#   end
+# end
 
-User.pluck(:id).each do |user|
-  Review.pluck(:id).sample(Review.all.count / (rand(4) + 2)).each do |review|
-    rand(10) > 2 ? vote = "up" : vote = "down"
-    if !Vote.exists?(user_id: user, review_id: review, vote: vote)
-      Vote.create!(user_id: user, review_id: review, vote: vote)
-    end
-  end
-end
+# User.pluck(:id).each do |user|
+#   Review.pluck(:id).sample(Review.all.count / (rand(4) + 2)).each do |review|
+#     rand(10) > 2 ? vote = "up" : vote = "down"
+#     if !Vote.exists?(user_id: user, review_id: review, vote: vote)
+#       Vote.create!(user_id: user, review_id: review, vote: vote)
+#     end
+#   end
+# end
