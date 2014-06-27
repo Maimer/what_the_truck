@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
 
   def new
     @food_truck = FoodTruck.find(params[:food_truck_id])
-    if !@food_truck.reviews.where(user: current_user)
+    if @food_truck.reviews.where(user: current_user)
       @review = Review.new
     else
       flash[:notice] = "You have already reviewed this food truck!"
@@ -17,12 +17,11 @@ class ReviewsController < ApplicationController
     @food_truck = FoodTruck.find(params[:food_truck_id])
 
     @review.food_truck_id = @food_truck.id
-    @user = @review.food_truck.user
-    @current_user = current_user
+    @user = User.find(@food_truck.user_id)
 
     if @review.save
-      ReviewMailer.new_review_email(@user).deliver
-      ReviewMailer.your_review_email(@current_user).deliver
+      ReviewMailer.new_review_email(@review).deliver
+      ReviewMailer.your_review_email(@review, current_user).deliver
       redirect_to @food_truck
     else
       flash.now[:notice] = "Your review was not succesfully submitted."
