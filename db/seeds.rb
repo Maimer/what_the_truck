@@ -14,12 +14,11 @@ Vote.delete_all
 end
 
 profile_photos = Dir.entries("#{Rails.root}/profile_images")
-profile_photos.shift(2)
+profile_photos.shift(3)
 
 User.all.each_with_index do |user, i|
   user.profile_photo.store!(File.open(File.join(Rails.root, "/profile_images/#{profile_photos[i]}")))
   user.save!
-  # binding.pry
 end
 
 food_trucks = [{name: "Baja Taco Truck", description: "Features amazing tacos, burritos and tostadas made with Carne Asada, chicken and fish prepared as it is in Baja.", website: "http://bajatacotruck.com/"},
@@ -192,11 +191,11 @@ User.pluck(:id).each do |user|
   end
 end
 
-# User.pluck(:id).each do |user|
-#   Review.pluck(:id).sample(Review.all.count / (rand(4) + 2)).each do |review|
-#     rand(10) > 2 ? vote = "up" : vote = "down"
-#     if !Vote.exists?(user_id: user, review_id: review, vote: vote)
-#       Vote.create!(user_id: user, review_id: review, vote: vote)
-#     end
-#   end
-# end
+User.pluck(:id).each do |user|
+  Review.pluck(:id).sample(Review.all.count / (rand(4) + 2)).each do |review|
+    rand(10) > 2 ? vote = "up" : vote = "down"
+    if !Vote.exists?(user_id: user, review_id: review, vote: vote)
+      Vote.create!(user_id: user, review_id: review, vote: vote)
+    end
+  end
+end
