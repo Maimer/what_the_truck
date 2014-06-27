@@ -15,7 +15,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @food_truck = FoodTruck.find(params[:food_truck_id])
-
+    @review.user_id = current_user.id
     @review.food_truck_id = @food_truck.id
     @user = User.find(@food_truck.user_id)
 
