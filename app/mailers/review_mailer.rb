@@ -7,6 +7,7 @@ class ReviewMailer < ActionMailer::Base
     mail(to: @user.email, subject: "New review on #{review.food_truck.name}!")
   end
 
+
   def your_review_email(review, user)
     @user = user
     @food_truck = review.food_truck

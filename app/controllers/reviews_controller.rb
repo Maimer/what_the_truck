@@ -22,6 +22,7 @@ class ReviewsController < ApplicationController
     if @review.save
       ReviewMailer.new_review_email(@review).deliver
       ReviewMailer.your_review_email(@review, current_user).deliver
+
       redirect_to @food_truck
     else
       flash.now[:notice] = "Your review was not succesfully submitted."
