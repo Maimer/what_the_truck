@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative 'helper'
 
 feature 'user adds a new truck', %Q{
   As a food truck aficionado

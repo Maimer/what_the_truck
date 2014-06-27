@@ -24,6 +24,7 @@ I want to be able to create an account so that I can log in to the site
 
     expect(page).to have_content("Sign Out")
     expect(page).to have_content("Welcome! You have signed up successfully.")
+    expect(User.last.admin).to be false
   end
 
   scenario 'registration info not supplied' do
@@ -49,4 +50,15 @@ I want to be able to create an account so that I can log in to the site
     expect(page).to_not have_content("Sign Out")
   end
 
+  scenario 'user admin default is false' do
+    user = FactoryGirl.create(:user)
+
+    expect(user.admin).to be false
+  end
+
+  scenario 'user admin default is false' do
+    user = FactoryGirl.create(:user, admin: true)
+
+    expect(user.admin).to be true
+  end
 end
