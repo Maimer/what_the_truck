@@ -57,12 +57,19 @@ food_trucks = [{name: "Baja Taco Truck", description: "Features amazing tacos, b
                {name: "Wow Barbecue", description: "Founded on July 1st 2013, Wow Barbecue began serving authentic Chinese Barbecue (food on a stick) on the streets of Boston in a bright red food truck. Along with 10 other partners, Wow Barbecue was founded and currently managed by Babson College MBA graduate Steve Liu. Most recently Wow Barbecue has expanded into two food trucks and opened a brick and mortar restaurant in the city of Malden, MA. Our mission is to introduce this delicious, and totally foreign food to the city of Boston and furthermore to provide a taste of home for all Chinese nationals working and studying in the area.", website: "http://www.wowbarbecue.com/"},
                {name: "Zo Authentic Gyros", description: "A few years back while visiting Greece and sampling some authentic Gyros, we discovered the great taste that was centuries in the making, but not for sale in the Boston Metro area. After being in the restaurant business for years, we knew that authentic Greek cuisine would be embraced by businessmen, tourists and foodies alike. Come discover a new taste and why it’s worth the trip. It’s Zo Good!", website: "http://www.zoboston.com/"}]
 
-food_trucks.each_with_index do |info, i|
+food_trucks.each do |info|
   info[:user_id] = User.pluck(:id).sample
-  info[:truck_photo] = File.open(File.join(Rails.root, "/food_truck_images/#{i}.jpg")))
   if !FoodTruck.exists?(info)
     FoodTruck.create!(info)
   end
+end
+
+truck_photos = Dir.entries("#{Rails.root}/food_truck_images")
+truck_photos.shift(2)
+
+FoodTruck.all.each_with_index do |truck, i|
+  truck.truck_photo.store!(File.open(File.join(Rails.root, "/food_truck_images/#{truck_photos[i]}")))
+  truck.save!
 end
 
 reviews = [{description: "Yum!  Bacon Bit Sammich was amazing.  I like the uniqueness of this truck and that they focus on a few great items.  Staff was friendly and efficient."},
@@ -167,22 +174,22 @@ reviews = [{description: "Yum!  Bacon Bit Sammich was amazing.  I like the uniqu
            {description: "Delicious pizza. Today was my second time going to this food truck and both times I was so happy with my pizza. I got the pepperoni pizza again, it was just so good the first time that I had to have it again. I love that it's ground peperoni instead of the sliced peperoni.  The buffalo chicken pizza looks so good. That's what I'll be trying next week and I feel confident that I'll love it."},
            {description: "It's really astounding you can get pizza this delicious from a food truck! I tried the pepperoni and the buffalo chicken and everything was fantastic. The crust was especially delicious - not too crispy, not too chewy. This is the best pizza I've had in Boston!"}]
 
-User.pluck(:id).each do |user|
-  num = rand(20) + 5
-  FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
-    descriptions = reviews.sample(num)
-    rating = rand(5) + 1
-    if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
-      Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
-    end
-  end
-end
+# User.pluck(:id).each do |user|
+#   num = rand(20) + 5
+#   FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
+#     descriptions = reviews.sample(num)
+#     rating = rand(5) + 1
+#     if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+#       Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+#     end
+#   end
+# end
 
-User.pluck(:id).each do |user|
-  Review.pluck(:id).sample(Review.all.count / (rand(4) + 2)).each do |review|
-    rand(10) > 2 ? vote = "up" : vote = "down"
-    if !Vote.exists?(user_id: user, review_id: review, vote: vote)
-      Vote.create!(user_id: user, review_id: review, vote: vote)
-    end
-  end
-end
+# User.pluck(:id).each do |user|
+#   Review.pluck(:id).sample(Review.all.count / (rand(4) + 2)).each do |review|
+#     rand(10) > 2 ? vote = "up" : vote = "down"
+#     if !Vote.exists?(user_id: user, review_id: review, vote: vote)
+#       Vote.create!(user_id: user, review_id: review, vote: vote)
+#     end
+#   end
+# end
