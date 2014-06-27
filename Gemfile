@@ -29,6 +29,7 @@ gem 'spring',        group: :development
 gem 'devise'
 gem 'simple_form'
 gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'randexp'
