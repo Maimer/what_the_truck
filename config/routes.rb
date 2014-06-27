@@ -11,4 +11,10 @@ Rails.application.routes.draw do
   resources :reviews, only: [] do
     resources :votes, only: [:create, :destroy]
   end
+
+  namespace :admin do
+    root to: 'food_trucks#index'
+    resources :food_trucks, only: [:index, :show, :destroy]
+    resources :reviews, only: [:destroy]
+  end
 end
