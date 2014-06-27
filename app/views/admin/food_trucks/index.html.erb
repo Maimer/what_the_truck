@@ -1,0 +1,7 @@
+<% @food_trucks.each do |food_truck| %>
+  <%= link_to admin_food_truck_path(food_truck), method: :delete do %>
+    &#10006;
+  <% end %> &nbsp;
+  <%= link_to food_truck.name, admin_food_truck_path(food_truck) %>
+  <br>
+<% end %>

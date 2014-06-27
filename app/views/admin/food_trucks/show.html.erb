@@ -1,0 +1,13 @@
+<h2><%= @food_truck.name %></h2>
+
+<% @reviews.each do |r| %>
+  <%= link_to admin_review_path(r.id), method: :delete do %>
+    &#10006;
+  <% end %>
+  Posted by: <%= r.user.first_name + " " + r.user.last_name %><br>
+  Created at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
+  Rating: <% r.rating.to_i.times do %>&#9733; <% end %><br>
+  <%= r.body %>
+  <br>
+  <br>
+<% end %>
