@@ -214,8 +214,8 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
-  mailcatcher
   kaminari
+  mailcatcher
   pg
   pry-rails
   rails (= 4.1.1)
