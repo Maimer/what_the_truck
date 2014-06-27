@@ -8,7 +8,7 @@
                      required: true,
                      input_html: {class: 'form-control'} %>
   <br>
-  <%= f.file_field :truck_photo {class: 'form-control'} %>
+  <%= f.input :truck_photo, type: :file, input_html: { class: 'form-control'} %>
   <br>
   <%= f.input :website, label: false,
                         placeholder: 'Website',
