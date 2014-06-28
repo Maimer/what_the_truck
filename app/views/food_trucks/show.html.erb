@@ -1,5 +1,7 @@
 <h2><%= @food_truck.name %></h2>
 
+<%= image_tag(@food_truck.truck_photo) %>
+
 <%= link_to @food_truck.website, @food_truck.website %><br><br>
 
 <%= @food_truck.description %><br><br>
@@ -7,6 +9,7 @@
 <%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck) %><br><br>
 
 <% @reviews.each do |r| %>
+  <%= image_tag(r.user.profile_photo) %>
   Posted by: <%= r.user.first_name + " " + r.user.last_name %><br>
   Created at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
   Upvotes: <%= r.votes.where(vote: 'up').count %> / Downvotes:
@@ -15,7 +18,7 @@
   <%= r.body %>
   <br>
   <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
-    Upvote / <%= link_to "Upvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
+    Upvote / <%= link_to "Downvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
   <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
     <%= link_to "Upvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> / Downvote
   <% else %>

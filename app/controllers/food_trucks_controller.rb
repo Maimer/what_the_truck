@@ -4,7 +4,7 @@ class FoodTrucksController < ApplicationController
 
   def index
     if params[:search]
-      @food_trucks = FoodTruck.search(params[:search][:query])
+      @food_trucks = FoodTruck.search(params[:search][:query]).page params[:page]
     else
       @food_trucks = FoodTruck.order(average_rating: :desc).page params[:page]
     end
@@ -14,7 +14,6 @@ class FoodTrucksController < ApplicationController
     @food_truck = FoodTruck.find(params[:id])
     @review = Review.new
     @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
-
   end
 
   def new
@@ -38,22 +37,9 @@ class FoodTrucksController < ApplicationController
     end
   end
 
-  def destroy
-    food_truck = FoodTruck.find(params[:id])
-    if current_user.admin || current_user.id == food_truck.user_id
-      if food_truck.destroy
-        flash[:notice] = "Successfully deleted food truck."
-        redirect_to root_path
-      end
-    else
-      flash[:alert] = "Failed to remove food truck."
-      render :show
-    end
-  end
-
   private
 
   def food_truck_params
-    params.require(:food_truck).permit(:name, :website, :description)
+    params.require(:food_truck).permit(:name, :website, :description, :truck_photo)
   end
 end
