@@ -9,6 +9,7 @@
 <%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck) %><br><br>
 
 <% @reviews.each do |r| %>
+  <%= image_tag(r.user.profile_photo) %>
   Posted by: <%= r.user.first_name + " " + r.user.last_name %><br>
   Created at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
   Upvotes: <%= r.votes.where(vote: 'up').count %> / Downvotes:
