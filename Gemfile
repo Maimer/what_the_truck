@@ -40,6 +40,7 @@ group :development, :test do
   gem 'capybara'
   gem 'pry-rails'
   gem 'mailcatcher'
+  gem 'email_spec'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
