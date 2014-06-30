@@ -1,5 +1,5 @@
 class FoodTruck < ActiveRecord::Base
-  has_many :reviews, dependent: :destroy
+  has_many :reviews, dependent: :destroy, counter_cache: true
   belongs_to :user
 
   validates :name, presence: true, uniqueness: true

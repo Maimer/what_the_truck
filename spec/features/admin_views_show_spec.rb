@@ -11,7 +11,7 @@ I want to be able to view a food truck page and delete reviews if I want to
 
     visit root_path
 
-    click_link 'Sign In'
+    first(:link, 'Sign In').click
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     click_button 'Sign in'
@@ -27,7 +27,7 @@ I want to be able to view a food truck page and delete reviews if I want to
 
     visit root_path
 
-    click_link 'Sign In'
+    first(:link, 'Sign In').click
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
     click_button 'Sign in'
