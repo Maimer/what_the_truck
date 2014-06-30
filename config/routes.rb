@@ -4,12 +4,12 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :food_trucks, only: [:index, :show, :new, :create, :destroy] do
-    resources :reviews, only: [:new, :create, :destroy]
+  resources :food_trucks, only: [:index, :show, :new, :create] do
+    resources :reviews, only: [:new, :create]
   end
 
   resources :reviews, only: [] do
-    resources :votes, only: [:create, :destroy]
+    resources :votes, only: [:create]
   end
 
   namespace :admin do
