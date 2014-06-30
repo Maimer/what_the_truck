@@ -8,39 +8,39 @@
 </head>
 <body>
   <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">What The Truck?</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><%= link_to 'Add a truck', new_food_truck_path %></li>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><%= image_tag('title.png') %></a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Add a truck', new_food_truck_path %></li>
 
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <%= simple_form_for :search, url: food_trucks_path(:index), html: {class: 'navbar-form'}, method: :get do |f| %>
-              <%= f.input :query, placeholder: "Search Trucks", label: false, input_html: { class:
-            'form-control'} %>
-              <% end %>
-            </li>
-            <% if user_signed_in? %>
-              <li><%= image_tag current_user.profile_photo, class: "navbar-avatar" %></li>
-              <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-            <% else %>
-              <li><%= link_to "Sign In", new_user_session_path %></li>
-              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= simple_form_for :search, url: food_trucks_path(:index), html: {class: 'navbar-form'}, method: :get do |f| %>
+            <%= f.input :query, placeholder: "Search Trucks", label: false, input_html: { class:
+          'form-control'} %>
             <% end %>
-          </ul>
-        </div>
+          </li>
+          <% if user_signed_in? %>
+            <li><%= image_tag current_user.profile_photo, class: "navbar-avatar" %></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <% end %>
+        </ul>
       </div>
     </div>
+  </div>
 
   <div class="container">
     <% if flash.any? %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627133556) do
+ActiveRecord::Schema.define(version: 20140630173724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140627133556) do
     t.integer  "user_id",                      null: false
     t.float    "average_rating", default: 0.0
     t.string   "truck_photo"
+    t.integer  "reviews_count",  default: 0
   end
 
   add_index "food_trucks", ["name"], name: "index_food_trucks_on_name", unique: true, using: :btree
