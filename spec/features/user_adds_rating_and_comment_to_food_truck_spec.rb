@@ -1,5 +1,4 @@
 require 'rails_helper'
-require_relative 'helper'
 
 feature 'user adds a review', %Q{
   As a food truck aficionado
