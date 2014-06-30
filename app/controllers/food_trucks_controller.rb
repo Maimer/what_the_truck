@@ -6,13 +6,12 @@ class FoodTrucksController < ApplicationController
     if params[:search]
       @food_trucks = FoodTruck.search(params[:search][:query]).page params[:page]
     else
-      @food_trucks = FoodTruck.order(average_rating: :desc).page params[:page]
+      @food_trucks = FoodTruck.order(average_rating: :desc).includes(:reviews).page params[:page]
     end
   end
 
   def show
     @food_truck = FoodTruck.find(params[:id])
-    @review = Review.new
     @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
   end
 
