@@ -3,9 +3,7 @@ User.delete_all
 Review.delete_all
 Vote.delete_all
 
-num = 40
-
-num.times do |i|
+50.times do |i|
   User.create({
     first_name: Randgen.first_name(length: rand(7) + 4),
     last_name: Randgen.last_name(length: rand(7) + 4),
@@ -13,6 +11,14 @@ num.times do |i|
     password: "seeder123",
     password_confirmation: "seeder123"
   })
+end
+
+profile_photos = Dir.entries("#{Rails.root}/profile_images")
+profile_photos.shift(3)
+
+User.all.each_with_index do |user, i|
+  user.profile_photo.store!(File.open(File.join(Rails.root, "/profile_images/#{profile_photos[i]}")))
+  user.save!
 end
 
 food_trucks = [{name: "Baja Taco Truck", description: "Features amazing tacos, burritos and tostadas made with Carne Asada, chicken and fish prepared as it is in Baja.", website: "http://bajatacotruck.com/"},
@@ -62,6 +68,14 @@ food_trucks.each do |info|
   if !FoodTruck.exists?(info)
     FoodTruck.create!(info)
   end
+end
+
+truck_photos = Dir.entries("#{Rails.root}/food_truck_images")
+truck_photos.shift(2)
+
+FoodTruck.all.each_with_index do |truck, i|
+  truck.truck_photo.store!(File.open(File.join(Rails.root, "/food_truck_images/#{truck_photos[i]}")))
+  truck.save!
 end
 
 reviews = [{description: "Yum!  Bacon Bit Sammich was amazing.  I like the uniqueness of this truck and that they focus on a few great items.  Staff was friendly and efficient."},
