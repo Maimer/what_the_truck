@@ -4,6 +4,7 @@ class ReviewMailer < ActionMailer::Base
   def new_review_email(review)
     @user = User.find(review.food_truck.user_id)
     @food_truck = review.food_truck
+    attachments.inline['photo.png'] = File.read('path/to/photo.png')
     mail(to: @user.email, subject: "New review on #{review.food_truck.name}!")
   end
 
