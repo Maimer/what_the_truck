@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
     @review.food_truck_id = @food_truck.id
 
-    @review.user_id = User.find(@food_truck.user_id)
+
 
     if @review.save
       ReviewMailer.new_review_email(@review).deliver

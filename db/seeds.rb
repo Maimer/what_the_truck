@@ -3,7 +3,7 @@ User.delete_all
 Review.delete_all
 Vote.delete_all
 
-50.times do |i|
+30.times do |i|
   User.create({
     first_name: Randgen.first_name(length: rand(7) + 4),
     last_name: Randgen.last_name(length: rand(7) + 4),
