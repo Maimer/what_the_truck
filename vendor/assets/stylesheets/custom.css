@@ -1,9 +1,52 @@
+body {
+  background-color: #232B2B;
+  color: #FFFFFF;
+}
+
+a {
+  color: #DC3D24;
+}
+
+a:hover {
+  color: #DC3D24;
+}
+
+.navbar {
+  background: #dc3d24; /* Old browsers */
+  background: -moz-linear-gradient(top, #dc3d24 0%, #db523d 50%, #dc3d24 65%, #db1d00 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dc3d24), color-stop(50%,#db523d), color-stop(65%,#dc3d24), color-stop(100%,#db1d00)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #dc3d24 0%,#db523d 50%,#dc3d24 65%,#db1d00 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #dc3d24 0%,#db523d 50%,#dc3d24 65%,#db1d00 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #dc3d24 0%,#db523d 50%,#dc3d24 65%,#db1d00 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #dc3d24 0%,#db523d 50%,#dc3d24 65%,#db1d00 100%); /* W3C */
+}
+
+.navbar-inverse .navbar-brand {
+  color: #232B2B;
+}
+
+.navbar-inverse .navbar-brand:hover {
+  color: #E3AE57;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #232B2B;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #E3AE57;
+}
+
 .navbar-avatar {
   padding: 0;
   margin: 10px 0 0 0;
   height: 30px;
   width: 30px;
   border-radius: 30px;
+}
+
+.main {
+  overflow: auto;
 }
 
 .index-blades {
@@ -13,11 +56,20 @@
 
 .food-trucks-blade {
   padding: 0 0 10px 0;
-  border-top: 1px solid #CCC;
+  border-top: 1px solid #FFFFFF;
   overflow: auto;
 }
 
+.food-trucks-blade h4 a {
+  color: #DC3D24;
+}
+
+.food-trucks-blade h4 small a {
+  color: #E3AE57;
+}
+
 .food-trucks-blade img {
+  border: 1px solid #FFF;
   margin: 0 10px 10px 0;
   height: 150px;
   width: 150px;
@@ -31,10 +83,19 @@ img.review-thumb {
 
 .welcome-right {
   float: left;
-  margin-left: 5%;
-  width: 30%;
-  background-color: #EEE;
-  padding: 10px;
+  margin-left: 2%;
+  width: 33%;
+  text-align: center;
+}
+
+.welcome-right h1 {
+  color: #DC3D24;
+}
+
+.welcome-right .sign-in {
+  margin-bottom: 15px;
+  border-top: 1px solid #FFFFFF;
+  padding: 15px 0 15px 0;
 }
 
 .latest-review img {
@@ -45,6 +106,32 @@ img.review-thumb {
 }
 
 .latest-review {
-  border-top: 1px solid #CCC;
+  text-align: left;
+  border-top: 1px solid #FFFFFF;
   padding-top: 10px;
+}
+
+.colors {
+  width: 100%;
+}
+
+.colors li {
+  list-style-type: none;
+  width: 25%;
+}
+
+.orange {
+  color: #DC3D24;
+}
+
+.dark-grey {
+  color: #232B2B;
+}
+
+.white {
+  color: #FFFFFF;
+}
+
+.yellow {
+  color: #E3AE57;
 }
