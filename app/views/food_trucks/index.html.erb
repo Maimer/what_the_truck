@@ -2,7 +2,7 @@
   <% @food_trucks.each do |food_truck| %>
     <div class="food-trucks-blade">
       <h4>
-        <%= image_tag(food_truck.truck_photo) %>
+        <%= image_tag(food_truck.truck_photo.url(:thumb)) %>
         <%= link_to food_truck.name, food_truck %> -
         <% food_truck.average_rating.ceil.times do %>&#9733;<% end %>
         <small>

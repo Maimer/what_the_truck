@@ -1,31 +1,33 @@
-<h2><%= @food_truck.name %></h2>
-
-<%= image_tag(@food_truck.truck_photo) %>
+<h2 class="yellow"><%= @food_truck.name %></h2>
 
 <%= link_to @food_truck.website, @food_truck.website %><br><br>
 
+<%= image_tag(@food_truck.truck_photo) %>
+
 <%= @food_truck.description %><br><br>
 
-<%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck) %><br><br>
+<%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck), class: 'btn btn-warning btn-lg' %><br><br>
 
-<% @reviews.each do |r| %>
-  <%= image_tag(r.user.profile_photo) %>
-  Posted by: <%= r.user.first_name + " " + r.user.last_name %><br>
-  Created at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
-  Upvotes: <%= r.votes.where(vote: 'up').count %> / Downvotes:
-  <%= r.votes.where(vote: 'down').count %><br>
-  Rating: <% r.rating.to_i.times do %>&#9733; <% end %><br>
-  <%= r.body %>
-  <br>
-  <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
-    Upvote / <%= link_to "Downvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
-  <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
-    <%= link_to "Upvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> / Downvote
-  <% else %>
-    <%= link_to "Upvote", review_votes_path(r, vote: { vote: "up" } ), method: :post %> /
-    <%= link_to "Downvote", review_votes_path(r, vote: { vote: "down" } ), method: :post %>
+<div class='food-truck-show-reviews'>
+  <% @reviews.each do |r| %>
+    <%= image_tag(r.user.profile_photo) %>
+    Posted by: <%= r.user.first_name + " " + r.user.last_name %><br>
+    Created at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
+    Upvotes: <%= r.votes.where(vote: 'up').count %> / Downvotes:
+    <%= r.votes.where(vote: 'down').count %><br>
+    Rating: <% r.rating.to_i.times do %>&#9733; <% end %><br>
+    <%= r.body %>
+    <br>
+    <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
+      Upvote / <%= link_to "Downvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
+    <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
+      <%= link_to "Upvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> / Downvote
+    <% else %>
+      <%= link_to "Upvote", review_votes_path(r, vote: { vote: "up" } ), method: :post %> /
+      <%= link_to "Downvote", review_votes_path(r, vote: { vote: "down" } ), method: :post %>
+    <% end %>
+    <br><br>
   <% end %>
-  <br><br>
-<% end %>
+</div>
 
 <%= paginate @reviews, window: 2%>
