@@ -12,7 +12,6 @@ class FoodTrucksController < ApplicationController
 
   def show
     @food_truck = FoodTruck.find(params[:id])
-    @review = Review.new
     @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
   end
 
