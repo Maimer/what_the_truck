@@ -8,22 +8,27 @@ I want to be able to create an account so that I can log in to the site
 # Acceptance Criteria
 
 # I must provide my username/email and password
-# I can optionally provide my first name, last name, city, and state
+# I can optionally provide my first name, last name, and avatar
 # I am presented with a success message if I sign in successfully
 # I'm presented with errors if I provide invalid credentials
 
-  scenario 'user inputs valid and required information' do
+  scenario 'user inputs valid and required information and avatar' do
     visit root_path
     click_link 'Sign Up'
-    fill_in 'First name', with: 'Harold'
-    fill_in 'Last name', with: 'Bendegas'
-    fill_in 'Email', with: 'user@bendegas.com'
-    fill_in 'Password', with: 'password', match: :prefer_exact
-    fill_in 'Password confirmation', with: 'password', match: :prefer_exact
+
+    user = FactoryGirl.build(:user)
+
+    fill_in 'First name', with: user.first_name
+    fill_in 'Last name', with: user.last_name
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password, match: :prefer_exact
+    fill_in 'Password confirmation', with: user.password, match: :prefer_exact
+    attach_file('Profile photo', 'spec/fixtures/ric_flair.jpg')
     click_button 'Sign up'
 
     expect(page).to have_content("Sign Out")
     expect(page).to have_content("Welcome! You have signed up successfully.")
+    expect(page).to have_image user.profile_photo.url
     expect(User.last.admin).to be false
   end
 
@@ -48,17 +53,5 @@ I want to be able to create an account so that I can log in to the site
 
     expect(page).to have_content("doesn't match")
     expect(page).to_not have_content("Sign Out")
-  end
-
-  scenario 'user admin default is false' do
-    user = FactoryGirl.create(:user)
-
-    expect(user.admin).to be false
-  end
-
-  scenario 'user admin default is false' do
-    user = FactoryGirl.create(:user, admin: true)
-
-    expect(user.admin).to be true
   end
 end

@@ -31,6 +31,7 @@
               <% end %>
             </li>
             <% if user_signed_in? %>
+              <li><%= image_tag current_user.profile_photo, class: "navbar-avatar" %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
             <% else %>
               <li><%= link_to "Sign In", new_user_session_path %></li>
