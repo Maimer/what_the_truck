@@ -36,7 +36,7 @@ I want to be able to view all food trucks and delete any that violate terms
 
     expect(page).to have_content food_truck.name
 
-    page.find_link(admin_food_truck_path(food_truck)).click
+    page.find_link(admin_food_truck_path(food_truck)).click #test can't find the link
 
     expect(page).to_not have_content food_truck.name
   end

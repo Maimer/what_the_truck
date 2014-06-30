@@ -37,7 +37,7 @@ I want to be able to view a food truck page and delete reviews if I want to
     expect(page).to have_content review.food_truck.name
     expect(page).to have_content review.body
 
-    page.find_link(admin_review_path(review.id)).click
+    page.find_link(admin_review_path(review.id)).click #test can't find the link
 
     expect(page).to_not have_content review.body
   end
