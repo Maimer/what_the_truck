@@ -2,15 +2,17 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <style type="text/css" media="screen">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+   <!--  /*<style type="text/css" media="screen">
       h3 { color: #DC3D24;
-          font-family: Verdana, sans-serif;}
+          font-family: Verdana, sans-serif;
+          }
       p {color: #000000;
           font-family: Verdana, sans-serif;}
       a {text-decoration: none;
           color: #DC3D24;
           font-family: Verdana, sans-serif;}
-    </style>
+    </style>*/ -->
   </head>
   <body>
     <h3>Your review on <%= @food_truck.name %></h3>
