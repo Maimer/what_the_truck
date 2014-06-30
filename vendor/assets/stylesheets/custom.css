@@ -85,7 +85,6 @@ img.review-thumb {
   float: left;
   margin-left: 2%;
   width: 33%;
-  border-top: 1px solid #FFFFFF;
   text-align: center;
 }
 
@@ -94,6 +93,8 @@ img.review-thumb {
 }
 
 .welcome-right .sign-in {
+  margin-bottom: 15px;
+  border-top: 1px solid #FFFFFF;
   padding: 15px 0 15px 0;
 }
 
@@ -106,7 +107,6 @@ img.review-thumb {
 
 .latest-review {
   text-align: left;
-  margin-top: 15px;
   border-top: 1px solid #FFFFFF;
   padding-top: 10px;
 }
