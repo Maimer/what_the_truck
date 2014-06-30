@@ -2,13 +2,26 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style type="text/css" media="screen">
+      h3 { color: #DC3D24;
+          font-family: Verdana, sans-serif;}
+      p {color: #000000;
+          font-family: Verdana, sans-serif;}
+      a {text-decoration: none;
+          color: #DC3D24;
+          font-family: Verdana, sans-serif;}
+    </style>
   </head>
   <body>
-    <h1>You have a new review on <%= @food_truck.name %></h1>
+    <h3>Your review on <%= @food_truck.name %></h3>
+    <%= image_tag attachments['photo.png'].url -%>
+    <p>Hey <%= @user.first_name %>, </p>
     <p>
-      Hello, <%= @user.first_name %> <%= @user.last_name %>
-      You just left a review on <%= @food_truck.name %>.<br>
+      You just left a review on <%= link_to "#{@food_truck.name }", food_truck_path(@food_truck) %>.<br>
     </p>
-    <p>Thanks for using What the Truck?</p>
+    <p>Thanks for using What the Truck?!</p>
+
+    <p>Keep on truckin',</p>
+    <p>The What the Truck? Team</p>
   </body>
 </html>
