@@ -1,9 +1,30 @@
-<% @food_trucks.each do |food_truck| %>
-  <%= link_to food_truck.name, food_truck %> -
-    <% food_truck.average_rating.ceil.times do %>
-      &#9733;
-    <% end %>
-  <br>
-<% end %>
+<div class='index-blades'>
+  <% @food_trucks.each do |food_truck| %>
+    <div class="food-trucks-blade">
+      <h4>
+        <%= image_tag(food_truck.truck_photo, class: 'img-thumbnail') %>
+        <%= link_to food_truck.name, food_truck %> -
+        <% food_truck.average_rating.ceil.times do %>&#9733;<% end %>
+        <small>
+          <%= link_to "#{food_truck.reviews.count} reviews", food_truck %>
+        </small>
+      </h4>
+      <br>
+      <%= image_tag(food_truck.reviews.last.user.profile_photo, class: 'review-thumb') %>
+      <% food_truck.reviews.last.rating.times do %>&#9733;<% end %>
+      <%= food_truck.reviews.last.user.first_name %>
+      <%= "#{food_truck.reviews.last.body.split('.')[0..3].join('.')}..." %>
+    </div>
+  <% end %>
 
-<%= paginate @food_trucks, window: 2 %>
+  <%= paginate @food_trucks, window: 2 %>
+</div>
+<div class="welcome-right">
+
+  <div class="latest-review">
+    <%= image_tag(@food_trucks.first.reviews.last.user.profile_photo) %>
+    <%= @food_trucks.first.reviews.last.user.first_name %><br>
+    <% @food_trucks.first.reviews.last.rating.times do %>&#9733;<% end %><br>
+    <%= @food_trucks.first.reviews.last.body %>
+  </div>
+</div>
