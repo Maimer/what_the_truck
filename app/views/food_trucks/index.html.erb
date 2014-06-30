@@ -9,10 +9,10 @@
           <%= link_to "#{food_truck.reviews.count} reviews", food_truck %>
         </small>
       </h4>
-      <br>
       <%= image_tag(food_truck.reviews.last.user.profile_photo, class: 'review-thumb') %>
       <% food_truck.reviews.last.rating.times do %>&#9733;<% end %>
       <%= food_truck.reviews.last.user.first_name %>
+      <br>
       <%= "#{food_truck.reviews.last.body.split('.')[0..3].join('.')}..." %>
     </div>
   <% end %>
@@ -20,6 +20,12 @@
   <%= paginate @food_trucks, window: 2 %>
 </div>
 <div class="welcome-right">
+  <% if user_signed_in? %>
+
+  <% else %>
+    <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %>
+    <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
+  <% end %>
 
   <div class="latest-review">
     <%= image_tag(@food_trucks.first.reviews.last.user.profile_photo) %>
