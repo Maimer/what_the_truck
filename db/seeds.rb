@@ -3,9 +3,7 @@ User.delete_all
 Review.delete_all
 Vote.delete_all
 
-num = 40
-
-num.times do |i|
+50.times do |i|
   User.create({
     first_name: Randgen.first_name(length: rand(7) + 4),
     last_name: Randgen.last_name(length: rand(7) + 4),
@@ -13,6 +11,14 @@ num.times do |i|
     password: "seeder123",
     password_confirmation: "seeder123"
   })
+end
+
+profile_photos = Dir.entries("#{Rails.root}/profile_images")
+profile_photos.shift(3)
+
+User.all.each_with_index do |user, i|
+  user.profile_photo.store!(File.open(File.join(Rails.root, "/profile_images/#{profile_photos[i]}")))
+  user.save!
 end
 
 food_trucks = [{name: "Baja Taco Truck", description: "Features amazing tacos, burritos and tostadas made with Carne Asada, chicken and fish prepared as it is in Baja.", website: "http://bajatacotruck.com/"},
@@ -82,7 +88,7 @@ reviews = [{description: "Yum!  Bacon Bit Sammich was amazing.  I like the uniqu
            {description: "Good, basic Halal fare. I had the straight up chicken dish which was definitely great. The sauces are tasty -- you add them yourself -- but watchout, the 'milder' red sauce is still pretty hot. Next time I'll mix in some yogurt sauce to cut the heat. Great price too."},
            {description: "If i had to complain about it, I would say that without the condiments, the food is actually a little dry and a tad bland.  However, it's the condiments which make the food absolutely delicious.  You will absolutely drench your food in the white garlic sauce.  For people who like spicy food, you'll apply some of the hot sauce."},
            {description: "his was my first food truck experience. I had high expectations. The plain grilled cheese was average and really greasy. Needed a napkin after every bite. The pulled pork grilled cheese was way richer and pretty good. I would rather use the calories on something else. Truffle fries were very flavorful but went soggy fast."},
-           {description: "Good God, this place is seriously the bees knees. My friends send each other text alerts every time we are in vicinity of the food truck. The service is great, I seriously love the people that work for Roxy's and they really seem to care about the food and the customers. I studied abroad during the fall and I was really upset that I couldn't get the fall melt because it was SO SO GOOD. I would work hard at the gym all week just to get that cheat meal. Since I'm vegetarian, I typically get the three cheese melt year round. This is the type of food truck that's worth chasing and if you are visiting Boston make it a point to grab a bite."},
+           {description: "Good God, this place is seriously the bees knees. My friends send each other text alerts every time we are in vicinity of the food truck. The service is great, I seriously love the people that work for this truck and they really seem to care about the food and the customers. I studied abroad during the fall and I was really upset that I couldn't get the fall melt because it was SO SO GOOD. I would work hard at the gym all week just to get that cheat meal. Since I'm vegetarian, I typically get the three cheese melt year round. This is the type of food truck that's worth chasing and if you are visiting Boston make it a point to grab a bite."},
            {description: "We found the truck next to Boston City Hall, buried behind a mass of people cueing for cheesy goodness. I got the Green Monster- and it was quite tasty - Munster Cheese, guacamole and bacon on white bread. Everything was fresh and quickly made. My only complaint (and it's a small one) was that it wasn't messy enough. The cheese was too contained within the bread, and you didn't get the ooze factor one sometimes wants from comfort food. The fries were also pretty amazing and were doled out rather generously."},
            {description: "One of my go-to's for lunch during the week when it is parked downtown. I like the 3 cheese with bacon but would enjoy it a little more if it wasn't as dry. Add more butter to the bread please! Their rosemary sea salt fries are perfectly cooked and tasty! Need more drink options. My only other complaint is the waiting time to actually get your food. It takes a big chunk out of my lunch break. Booooo"},
            {description: "OMG, that's all I have to say! I purchased the Mighty Beef and truffle fries. The sandwich was AMAZING!! I love the BBQ beef and melted cheese, sooooo goooood. The truffle fries were awesome!!! It smelled the entire office so I had to offer my coworkers some. One even loved it so much he went to purchase his own! Definitely a must come back every Wednesday by Prudential! My new favorite food truck!!!"},
@@ -174,22 +180,22 @@ reviews = [{description: "Yum!  Bacon Bit Sammich was amazing.  I like the uniqu
            {description: "Delicious pizza. Today was my second time going to this food truck and both times I was so happy with my pizza. I got the pepperoni pizza again, it was just so good the first time that I had to have it again. I love that it's ground peperoni instead of the sliced peperoni.  The buffalo chicken pizza looks so good. That's what I'll be trying next week and I feel confident that I'll love it."},
            {description: "It's really astounding you can get pizza this delicious from a food truck! I tried the pepperoni and the buffalo chicken and everything was fantastic. The crust was especially delicious - not too crispy, not too chewy. This is the best pizza I've had in Boston!"}]
 
-# User.pluck(:id).each do |user|
-#   num = rand(20) + 5
-#   FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
-#     descriptions = reviews.sample(num)
-#     rating = rand(5) + 1
-#     if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
-#       Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
-#     end
-#   end
-# end
+User.pluck(:id).each do |user|
+  num = rand(20) + 5
+  FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
+    descriptions = reviews.sample(num)
+    rating = rand(5) + 1
+    if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+      Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+    end
+  end
+end
 
-# User.pluck(:id).each do |user|
-#   Review.pluck(:id).sample(Review.all.count / (rand(4) + 2)).each do |review|
-#     rand(10) > 2 ? vote = "up" : vote = "down"
-#     if !Vote.exists?(user_id: user, review_id: review, vote: vote)
-#       Vote.create!(user_id: user, review_id: review, vote: vote)
-#     end
-#   end
-# end
+User.pluck(:id).each do |user|
+  Review.pluck(:id).sample(Review.all.count / (rand(4) + 2)).each do |review|
+    rand(10) > 2 ? vote = "up" : vote = "down"
+    if !Vote.exists?(user_id: user, review_id: review, vote: vote)
+      Vote.create!(user_id: user, review_id: review, vote: vote)
+    end
+  end
+end
