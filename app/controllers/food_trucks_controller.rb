@@ -14,21 +14,10 @@ class FoodTrucksController < ApplicationController
     @food_truck = FoodTruck.find(params[:id])
     @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
 
-    # Breakfast: 6-10AM; Lunch 10AM-3PM; Dinner: 3-11PM; Late Night: 11PM-12AM
-    hour = Time.now.hour
-    meal = "None"
-    if hour >= 6 && hour < 10
-      meal = "Breakfast"
-    elsif hour >= 10 && hour < 15
-      meal = "Lunch"
-    elsif hour >= 15 && hour < 23
-      meal = "Dinner"
-    elsif hour >= 23
-      meal = "Late Night"
-    end
+    meal = MealTime.get_meal_time
 
     @location = Location.where(food_truck_id: @food_truck.id,
-                               day_of_week: Time.now.strftime('%A'),
+                               day_of_week: Time.now.getlocal.strftime('%A'),
                                time_of_day: meal)
 
     if @location.size == 0

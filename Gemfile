@@ -35,6 +35,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'nokogiri'
 
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   gem 'randexp'
   gem 'factory_girl_rails'
