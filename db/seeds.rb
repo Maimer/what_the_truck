@@ -3,7 +3,15 @@ User.delete_all
 Review.delete_all
 Vote.delete_all
 
-30.times do |i|
+profile_photos = Dir.entries("#{Rails.root}/profile_images")
+
+profile_photos.each do |photo|
+  if photo[-3..-1] != "jpg" || photo[-3..-1] != "png"
+    profile_photos.reject!(photo)
+  end
+end
+
+profile_photos.size.times do
   User.create({
     first_name: Randgen.first_name(length: rand(7) + 4),
     last_name: Randgen.last_name(length: rand(7) + 4),
@@ -12,9 +20,6 @@ Vote.delete_all
     password_confirmation: "seeder123"
   })
 end
-
-profile_photos = Dir.entries("#{Rails.root}/profile_images")
-profile_photos.shift(3)
 
 User.all.each_with_index do |user, i|
   user.profile_photo.store!(File.open(File.join(Rails.root, "/profile_images/#{profile_photos[i]}")))
