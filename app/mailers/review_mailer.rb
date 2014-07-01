@@ -13,6 +13,7 @@ class ReviewMailer < ActionMailer::Base
   def your_review_email(review, user)
     @user = user
     @food_truck = review.food_truck
+    attachments.inline['title.png'] = File.read(Rails.root.join("app/assets/images/title.png"))
     attachments.inline['photo.png'] = File.read(Rails.root.join("public/#{@food_truck.truck_photo.url(:thumb)}"))
     mail(to: @user.email, subject: "Your review on #{review.food_truck.name}")
   end
