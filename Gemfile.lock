@@ -228,6 +228,7 @@ DEPENDENCIES
   launchy
   mailcatcher
   mini_magick
+  nokogiri
   pg
   pry-rails
   rails (= 4.1.1)

@@ -1,36 +1,60 @@
 <div class='index-blades'>
-  <% @food_trucks.each do |food_truck| %>
-    <div class="food-trucks-blade">
-      <h4>
-        <%= image_tag(food_truck.truck_photo, class: 'img-thumbnail') %>
-        <%= link_to food_truck.name, food_truck %> -
-        <% food_truck.average_rating.ceil.times do %>&#9733;<% end %>
-        <small>
-          <%= link_to "#{food_truck.reviews.count} reviews", food_truck %>
-        </small>
-      </h4>
-      <%= image_tag(food_truck.reviews.last.user.profile_photo, class: 'review-thumb') %>
-      <% food_truck.reviews.last.rating.times do %>&#9733;<% end %>
-      <%= food_truck.reviews.last.user.first_name %>
-      <br>
-      <%= "#{food_truck.reviews.last.body.split('.')[0..3].join('.')}..." %>
+  <% if !@food_trucks.empty? %>
+    <% @food_trucks.each do |food_truck| %>
+      <div class="food-trucks-blade">
+        <h4>
+          <%= image_tag(food_truck.truck_photo.url(:thumb)) %>
+          <%= link_to food_truck.name, food_truck %> -
+          <% food_truck.average_rating.ceil.times do %>&#9733;<% end %>
+          <% if food_truck.reviews.size != 0 %>
+            <small>
+              <%= link_to "#{food_truck.reviews.size} reviews", food_truck %>
+            </small>
+          <% end %>
+        </h4>
+        <% if food_truck.reviews.size != 0 %>
+          <%= image_tag(food_truck.reviews.last.user.profile_photo, class: 'review-thumb') %>
+          <% food_truck.reviews.last.rating.times do %>&#9733;<% end %>
+          <span class="yellow">
+            <%= food_truck.reviews.last.user.first_name %>
+          </span>
+          <br>
+          <%= "#{food_truck.reviews.last.body.split('.')[0..3].join('.')}..." %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= paginate @food_trucks, window: 2 %>
+  <% end %>
+</div>
+
+<div class="welcome-right">
+
+  <% if user_signed_in? %>
+    <div class="sign-in">
+      <h1>Did we miss a truck?</h1>
+      <br><br>
+      <%= link_to 'Add a food truck', new_food_truck_path, class: 'btn btn-warning btn-lg' %>
+    </div>
+
+  <% else %>
+    <div class="sign-in">
+      <h1>Come on in!</h1>
+      <h5>Sign up its free</h5>
+      <br><br>
+      <%= link_to "Sign In", new_user_session_path, class: 'btn btn-warning' %>
+      <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-warning' %>
     </div>
   <% end %>
 
-  <%= paginate @food_trucks, window: 2 %>
-</div>
-<div class="welcome-right">
-  <% if user_signed_in? %>
-
-  <% else %>
-    <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %>
-    <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %>
-  <% end %>
-
   <div class="latest-review">
-    <%= image_tag(@food_trucks.first.reviews.last.user.profile_photo) %>
-    <%= @food_trucks.first.reviews.last.user.first_name %><br>
-    <% @food_trucks.first.reviews.last.rating.times do %>&#9733;<% end %><br>
-    <%= @food_trucks.first.reviews.last.body %>
+    <% if @food_trucks.first.reviews.size != 0 %>
+      <%= image_tag(@food_trucks.first.reviews.last.user.profile_photo) %>
+      <span class="yellow">
+        <%= @food_trucks.first.reviews.last.user.first_name %>
+      </span><br>
+      <% @food_trucks.first.reviews.last.rating.times do %>&#9733;<% end %><br>
+      <%= @food_trucks.first.reviews.last.body %>
+    <% end %>
   </div>
 </div>
