@@ -5,13 +5,9 @@ Vote.delete_all
 
 profile_photos = Dir.entries("#{Rails.root}/profile_images")
 
-binding.pry
-
 profile_photos.each do |photo|
   profile_photos.reject! { |photo| photo[-3..-1] != "jpg" && photo[-3..-1] != "png" }
 end
-
-binding.pry
 
 profile_photos.size.times do
   User.create({
