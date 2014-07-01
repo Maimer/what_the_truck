@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20140630202716) do
     t.integer  "user_id",                      null: false
     t.float    "average_rating", default: 0.0
     t.string   "truck_photo"
+    t.integer  "reviews_count",  default: 0
   end
 
   add_index "food_trucks", ["name"], name: "index_food_trucks_on_name", unique: true, using: :btree
