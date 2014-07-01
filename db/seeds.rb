@@ -180,13 +180,18 @@ reviews = [{description: "Yum!  Bacon Bit Sammich was amazing.  I like the uniqu
            {description: "Delicious pizza. Today was my second time going to this food truck and both times I was so happy with my pizza. I got the pepperoni pizza again, it was just so good the first time that I had to have it again. I love that it's ground peperoni instead of the sliced peperoni.  The buffalo chicken pizza looks so good. That's what I'll be trying next week and I feel confident that I'll love it."},
            {description: "It's really astounding you can get pizza this delicious from a food truck! I tried the pepperoni and the buffalo chicken and everything was fantastic. The crust was especially delicious - not too crispy, not too chewy. This is the best pizza I've had in Boston!"}]
 
+begin_time = Time.new(2005)
+end_time = Time.now
+
 User.pluck(:id).each do |user|
   num = rand(20) + 5
   FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
     descriptions = reviews.sample(num)
     rating = rand(5) + 1
     if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
-      Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+      new_review = Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+      new_review.created_at = rand(begin_time..end_time)
+      new_review.save!
     end
   end
 end
