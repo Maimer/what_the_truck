@@ -36,6 +36,8 @@ gem 'mini_magick'
 gem 'premailer-rails'
 gem 'nokogiri'
 
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   gem 'randexp'
   gem 'factory_girl_rails'
@@ -45,6 +47,7 @@ group :development, :test do
   gem 'mailcatcher'
   gem 'launchy'
   gem 'email_spec'
+  gem 'dotenv-rails'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
