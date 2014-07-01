@@ -4,15 +4,17 @@ class FoodTrucksController < ApplicationController
 
   def index
     if params[:search]
-      @food_trucks = FoodTruck.includes(reviews: :user).search(params[:search][:query]).page params[:page]
+      @food_trucks = FoodTruck.includes(reviews: :user).search(params[:search][:query]).page(params[:page])
     else
-      @food_trucks = FoodTruck.includes(reviews: :user).order(average_rating: :desc).page params[:page]
+      @food_trucks = FoodTruck.includes(reviews: :user).order(average_rating: :desc).page(params[:page])
     end
   end
 
   def show
-    @food_truck = FoodTruck.find(params[:id])
-    @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
+    @food_truck = FoodTruck.includes(reviews: [:user, :votes]).page(params[:page]).find(params[:id])
+    # @food_truck = FoodTruck.includes(reviews: [:votes, :user]).find(params[:id])
+    # @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
+    # @reviews = Kaminari.paginate_array(@food_truck.reviews).page(params[:page])
   end
 
   def new

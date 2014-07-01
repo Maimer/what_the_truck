@@ -8,8 +8,18 @@
   <br><br>
 </div>
 
+
 <div class='food-truck-show-reviews'>
-  <% @reviews.each do |r| %>
+  <% @food_truck.reviews.each do |r| %>
+    <% upvote = 0 %>
+    <% downvote = 0 %>
+    <% r.votes.each do |v|%>
+      <% if v.vote == 'up' %>
+        <% upvote += 1 %>
+      <% else%>
+        <% downvote += 1 %>
+      <% end %>
+     <% end %>
     <div class='food-truck-review-blade'>
       <%= image_tag(r.user.profile_photo) %>
       <% r.rating.to_i.times do %>&#9733; <% end %>
@@ -17,13 +27,23 @@
         <%= r.user.first_name + " " + r.user.last_name %>
       </span>
        at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
-      <span class="yellow">Upvotes: <%= r.votes.where(vote: 'up').count %> / Downvotes:
-      <%= r.votes.where(vote: 'down').count %><br></span>
+      <span class="yellow">Upvotes: <%= upvote %> / Downvotes:
+      <%= downvote %><br></span>
       <%= r.body %>
       <br>
-      <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
+
+      <% review_users_up = []%>
+      <% review_users_down = []%>
+      <% r.votes.each do |v|%>
+        <% if v.vote == 'up' %>
+        <% review_users_up << v.user_id %>
+        <% else %>
+          <% review_users_down << v.user_id %>
+        <% end%>
+      <% end%>
+      <% if review_users_up.include?(current_user.id) %>
         Upvote / <%= link_to "Downvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
-      <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
+      <% elsif review_users_down.include?(current_user.id) %>
         <%= link_to "Upvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> / Downvote
       <% else %>
         <%= link_to "Upvote", review_votes_path(r, vote: { vote: "up" } ), method: :post %> /
@@ -31,7 +51,7 @@
       <% end %>
     </div>
   <% end %>
-  <%= paginate @reviews, window: 2%>
+
 </div>
 
 
