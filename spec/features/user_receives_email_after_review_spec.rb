@@ -12,7 +12,17 @@ I want to receive an email after I leave a new review on a food truck
     user = FactoryGirl.create(:user)
     review = FactoryGirl.create(:review)
 
-    visit new_food_truck_review_path(review)
+    visit root_path
+
+    click_link 'Sign In'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    click_button 'Sign in'
+
+    visit food_truck_path(review.food_truck)
+
+    click_link 'Create a New Review!'
+
 
     fill_in 'Rating', with: 4
     fill_in 'Body', with: 'This is a review body'
