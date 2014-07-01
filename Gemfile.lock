@@ -58,6 +58,11 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    dotenv (0.11.1)
+      dotenv-deployment (~> 0.0.2)
+    dotenv-deployment (0.0.2)
+    dotenv-rails (0.11.1)
+      dotenv (= 0.11.1)
     email_spec (1.6.0)
       launchy (~> 2.1)
       mail (~> 2.2)
@@ -220,6 +225,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   devise
+  dotenv-rails
   email_spec
   factory_girl_rails
   jbuilder (~> 2.0)
