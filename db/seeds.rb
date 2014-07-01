@@ -14,7 +14,7 @@ Vote.delete_all
 end
 
 profile_photos = Dir.entries("#{Rails.root}/profile_images")
-profile_photos.shift(2)
+profile_photos.shift(3)
 
 User.all.each_with_index do |user, i|
   user.profile_photo.store!(File.open(File.join(Rails.root, "/profile_images/#{profile_photos[i]}")))
