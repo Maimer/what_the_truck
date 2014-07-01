@@ -19,6 +19,6 @@
 /profile_images
 /truck_images
 /website_images
-/public/images
+/public/uploads
 
 .env
