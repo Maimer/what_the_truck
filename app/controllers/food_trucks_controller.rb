@@ -11,10 +11,9 @@ class FoodTrucksController < ApplicationController
   end
 
   def show
-    @food_truck = FoodTruck.includes(reviews: [:user, :votes]).page(params[:page]).find(params[:id])
+    @food_truck = FoodTruck.includes(reviews: [:user, :votes]).order("reviews.votes_count desc").page(params[:page]).find(params[:id])
     # @food_truck = FoodTruck.includes(reviews: [:votes, :user]).find(params[:id])
     # @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
-    # @reviews = Kaminari.paginate_array(@food_truck.reviews).page(params[:page])
   end
 
   def new
