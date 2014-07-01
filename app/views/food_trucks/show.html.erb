@@ -6,6 +6,7 @@
   <br><br>
   <%= @food_truck.description %>
   <br><br>
+  <iframe src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_KEY'] %>&q=<%= @location %>" width="300" height="300" frameborder="0" style="border:0"></iframe>
 </div>
 
 <div class='food-truck-show-reviews'>
