@@ -2,24 +2,33 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <style type="text/css" media="screen">
-      h3 { color: #DC3D24;
-          font-family: Verdana, sans-serif;}
-      p {color: #000000;
-          font-family: Verdana, sans-serif;}
-      a {text-decoration: none;
-          color: #DC3D24;
-          font-family: Verdana, sans-serif;}
+    <link rel="stylesheet" type="text/css" href="custom.css">
+    <style>
+    .white {background-color: #FFFFFF;}
+    .container {background-color: #FFFFFF;}
+    .image {background-color: #DC3D24;}
+    h3 {font-family: Helvetica, sans-serif;
+        color: #000000;}
+    p {font-family: Helvetica, sans-serif;
+      color: #000000;}
+    a {font-family: Helvetica, sans-serif;
+        text-decoration: none;}
     </style>
   </head>
-  <body>
-    <h3>Your review on <%= @food_truck.name %></h3>
-    <%= image_tag attachments['photo.png'].url -%>
-    <p>Hey <%= @user.first_name %>, </p>
-    <p>
-      Thanks for your review on <%= link_to "#{@food_truck.name }", food_truck_path(@food_truck) %>.<br>
-    </p>
-    <p>Keep on truckin',</p>
-    <p>The What the Truck? Team</p>
+  <body class="white">
+
+    <div class="container">
+     <div>
+      <%= image_tag attachments['title.png'].url -%>
+      </div>
+      <h3 class="orange">Your review on <%= @food_truck.name %></h3>
+      <%= image_tag attachments['photo.png'].url -%>
+      <p>Hey <%= @user.first_name %>, </p>
+      <p>Thanks for your review on <%= link_to "#{@food_truck.name}", food_truck_path(@food_truck), class: "orange" %>.<br></p>
+      <p>Keep on truckin',</p>
+      <p>The What the Truck?! Team</p>
+      <%= link_to "Check Out the Trucks", food_trucks_path %>
+    </div>
+
   </body>
 </html>

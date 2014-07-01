@@ -33,6 +33,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'premailer-rails'
 gem 'nokogiri'
 
 group :development, :test do
