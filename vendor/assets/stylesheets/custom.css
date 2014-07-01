@@ -65,6 +65,22 @@ a:hover {
   padding: 0;
 }
 
+.jumbotron {
+  margin-top: 15px;
+  background-image: url(/assets/header-overhead.jpg);
+  background-position: center;
+  background-repeat: none;
+  color: #FFFFFF;
+  text-shadow: 4px 4px 5px rgba(0, 0, 0, 1);
+}
+
+.jumbotron a {
+  text-shadow: none;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+}
+
 .welcome-image {
   background-image: url(/assets/header-bw-text.jpg);
   border: 1px solid #000;
