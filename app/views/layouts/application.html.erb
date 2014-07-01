@@ -43,13 +43,13 @@
     </div>
   </div>
 
-  <% if request.original_url == 'http://localhost:3000/' %>
-    <div class="welcome-image">
-
-    </div>
-  <% end %>
-
   <div class="container">
+    <% if request.original_url == 'http://localhost:3000/' %>
+      <div class="welcome-image">
+        <span class="welcome-text1">WHAT THE TRUCK?!<small>your one stop for food truck reviews</small></span>
+
+      </div>
+    <% end %>
     <% if flash.any? %>
       <div class="alert alert-warning" role="alert">
         <strong>
