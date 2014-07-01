@@ -16,7 +16,7 @@
           <%= image_tag(food_truck.reviews.last.user.profile_photo, class: 'review-thumb') %>
           <% food_truck.reviews.last.rating.times do %>&#9733;<% end %>
           <span class="yellow">
-            <%= food_truck.reviews.last.user.first_name %>
+            <%= food_truck.reviews.last.user.first_name + " " + food_truck.reviews.last.user.last_name %>
           </span>
           <br>
           <%= "#{food_truck.reviews.last.body.split('.')[0..3].join('.')}..." %>
@@ -28,16 +28,18 @@
   <% end %>
 </div>
 
-<div class="welcome-right">
-
-  <div class="latest-review">
-    <% if @food_trucks.first.reviews.size != 0 %>
-      <%= image_tag(@food_trucks.first.reviews.last.user.profile_photo) %>
-      <span class="yellow">
-        <%= @food_trucks.first.reviews.last.user.first_name %>
-      </span><br>
-      <% @food_trucks.first.reviews.last.rating.times do %>&#9733;<% end %><br>
-      <%= @food_trucks.first.reviews.last.body %>
+<div class="right">
+  <h3>Latest Reviews</h3>
+  <% if @reviews.size != 0 %>
+    <% @reviews.each do |r| %>
+      <div class="latest-review">
+        <%= image_tag(r.user.profile_photo) %>
+        <span class="yellow">
+          <%= r.user.first_name %>
+        </span><br>
+        <% r.rating.times do %>&#9733;<% end %><br>
+        <%= r.body %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
 </div>

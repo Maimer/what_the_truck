@@ -20,7 +20,7 @@ class TruckPhotoUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  process resize_to_fill: [300, 200]
+  process resize_to_fill: [640, 300]
 
   version :thumb do
     process resize_to_fill: [150, 150]

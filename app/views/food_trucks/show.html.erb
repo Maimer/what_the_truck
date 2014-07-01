@@ -1,17 +1,18 @@
 <div class="food-truck-show-profile">
-  <%= image_tag(@food_truck.truck_photo) %>
-  <%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck), class: 'btn btn-warning btn-lg' %>
+  <div class="map">
+    <%= image_tag(@food_truck.truck_photo) %>
+    <iframe src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_KEY'] %>&q=<%= @location %>" width="480" height="300" frameborder="0" style="border:0"></iframe>
+  </div>
+</div>
+
+<div class='food-truck-show-reviews'>
   <h2><%= @food_truck.name %></h2>
   <%= link_to @food_truck.website, @food_truck.website %>
   <br><br>
   <%= @food_truck.description %>
   <br><br>
-  <% if !@location.nil? %>
-    <iframe src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_KEY'] %>&q=<%= @location %>" width="300" height="300" frameborder="0" style="border:0"></iframe>
-  <% end %>
-</div>
-
-<div class='food-truck-show-reviews'>
+  <%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck), class: 'btn btn-warning btn-lg' %>
+  <br><br>
   <% @reviews.each do |r| %>
     <div class='food-truck-review-blade'>
       <%= image_tag(r.user.profile_photo) %>
@@ -37,4 +38,17 @@
   <%= paginate @reviews, window: 2%>
 </div>
 
-
+<div class="right">
+  <h3>Try these food trucks!</h3>
+  <% if @food_trucks.size != 0 %>
+    <% @food_trucks.each do |t| %>
+      <div class="latest-review">
+        <%= image_tag(t.truck_photo.url(:thumb)) %>
+        <%= link_to t.name, t %> -
+        <% t.average_rating.ceil.times do %>&#9733;<% end %>
+        <br>
+        <%= t.description %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
