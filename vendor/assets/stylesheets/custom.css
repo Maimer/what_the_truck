@@ -1,7 +1,7 @@
 body {
   background-color: #232B2B;
   color: #FFFFFF;
-  padding-top: 40px;
+  padding-top: 51px;
 }
 
 a {
@@ -66,48 +66,29 @@ a:hover {
 }
 
 .welcome-image {
-  background-image: url(/assets/header-bw.jpg);
+  background-image: url(/assets/header-bw-text.jpg);
   border: 1px solid #000;
   height: 350px;
   width: 100%;
-  margin-top: 25px;
+  margin-top: 15px;
   display: block;
   background-position: center;
 }
 
-.welcome-text {
-  font-size: 6em;
-  display: block;
-  margin: 130px 0 0 45px;
-  color: #FFFFFF;
-  font-weight: 900;
-  font-family: "Ubuntu", Helvetica, Arial, sans-serif!important;
-  -webkit-text-stroke: 2px black;
+.welcome-image .sign-in {
+  text-align: center;
+  margin-top: 220px;
 }
 
-.welcome-text small {
-  font-size: .4em;
-  display: block;
-  margin: -40px 0 0 25px;
-  color: #FFFFFF;
-  font-family: "Ubuntu", Helvetica, Arial, sans-serif!important;
+.welcome-image .sign-in {
+  text-align: center;
+  margin-top: 220px;
 }
 
-.welcome-text1 {
-  font-size: 6em;
-  display: block;
-  margin: 130px 0 0 45px;
-  color: #DC3D24;
-  font-weight: 900;
-  font-family: Copperplate, "Copperplate Gothic Light", fantasy;
-}
-
-.welcome-text1 small {
-  font-size: .4em;
-  display: block;
-  margin: -40px 0 0 25px;
-  color: #DC3D24;
-  font-family: "Ubuntu", Helvetica, Arial, sans-serif!important;
+.welcome-image .sign-in a {
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
 }
 
 .index-blades {
