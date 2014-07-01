@@ -60,8 +60,8 @@ food_trucks = [{name: "Baja Taco Truck", description: "Features amazing tacos, b
                {name: "The Pasta Pot", description: "The Pasta Pot is a family owned and operated 'restaurant on wheels' operating mostly in Boston, serving at special events all over New England. We have new twists on all your italian favorites. Our signature dish is our famous Meatball Mac & Cheese! It's to die for!", website: "http://thepastapot.com/"},
                {name: "The Taco Truck", description: "The Taco Truck was born out of an adventurous and extraordinary idea - to bring the authentic Mexican taqueria cuisine that we love so much to the East Coast. With our entrepreneurial spirit and desire to create unique and inspiring brands in tow, we set out to bring this authenticity to the nation in an experimental way: a food truck. In 2009 we launched our very first truck in New Jersey. It turns out we weren’t the only ones craving authentic Mexican tacos, and with a commitment to sustainability we’ve forged ahead. So far we've opened stores, kiosks, carts, and trucks in NY, MA, and NJ - and we're only getting started!", website: "http://thetacotruck.com/"},
                {name: "Uyghur Kitchen", description: "As one can imagine the food of the Uyghurs are largely influenced by the historic exchange of goods in this area, making them mostly traders. Xinjiang’s harsh desert terrain is largely uncultivable, but a system of irrigation introduced by the ancient Uyghurs created “oases,” allowing people in this area to begin cultivating vegetables, wheat and fruit. These oases are famous for producing sweet melons and grapes. However, the feature food of the Uyghurs is the incredible Lamb Kebab, often simply prepared allowing the quality of the meat to shine. Lamb Kebabs roasting over coals and nan, a leavened flatbread cooked in a Tandoor oven, are common street foods for Uyghurs.", website: "http://uyghurkitchen.com/"},
-               {name: "Wow Barbecue", description: "Founded on July 1st 2013, Wow Barbecue began serving authentic Chinese Barbecue (food on a stick) on the streets of Boston in a bright red food truck. Along with 10 other partners, Wow Barbecue was founded and currently managed by Babson College MBA graduate Steve Liu. Most recently Wow Barbecue has expanded into two food trucks and opened a brick and mortar restaurant in the city of Malden, MA. Our mission is to introduce this delicious, and totally foreign food to the city of Boston and furthermore to provide a taste of home for all Chinese nationals working and studying in the area.", website: "http://www.wowbarbecue.com/"},
-               {name: "Zo Authentic Gyros", description: "A few years back while visiting Greece and sampling some authentic Gyros, we discovered the great taste that was centuries in the making, but not for sale in the Boston Metro area. After being in the restaurant business for years, we knew that authentic Greek cuisine would be embraced by businessmen, tourists and foodies alike. Come discover a new taste and why it’s worth the trip. It’s Zo Good!", website: "http://www.zoboston.com/"}]
+               {name: "Barbecue Lamb Brothers", description: "Founded on July 1st 2013, Wow Barbecue began serving authentic Chinese Barbecue (food on a stick) on the streets of Boston in a bright red food truck. Along with 10 other partners, Wow Barbecue was founded and currently managed by Babson College MBA graduate Steve Liu. Most recently Wow Barbecue has expanded into two food trucks and opened a brick and mortar restaurant in the city of Malden, MA. Our mission is to introduce this delicious, and totally foreign food to the city of Boston and furthermore to provide a taste of home for all Chinese nationals working and studying in the area.", website: "http://www.wowbarbecue.com/"},
+               {name: "Zo on the Go", description: "A few years back while visiting Greece and sampling some authentic Gyros, we discovered the great taste that was centuries in the making, but not for sale in the Boston Metro area. After being in the restaurant business for years, we knew that authentic Greek cuisine would be embraced by businessmen, tourists and foodies alike. Come discover a new taste and why it’s worth the trip. It’s Zo Good!", website: "http://www.zoboston.com/"}]
 
 food_trucks.each do |info|
   info[:user_id] = User.pluck(:id).sample
@@ -180,13 +180,18 @@ reviews = [{description: "Yum!  Bacon Bit Sammich was amazing.  I like the uniqu
            {description: "Delicious pizza. Today was my second time going to this food truck and both times I was so happy with my pizza. I got the pepperoni pizza again, it was just so good the first time that I had to have it again. I love that it's ground peperoni instead of the sliced peperoni.  The buffalo chicken pizza looks so good. That's what I'll be trying next week and I feel confident that I'll love it."},
            {description: "It's really astounding you can get pizza this delicious from a food truck! I tried the pepperoni and the buffalo chicken and everything was fantastic. The crust was especially delicious - not too crispy, not too chewy. This is the best pizza I've had in Boston!"}]
 
+begin_time = Time.new(2005)
+end_time = Time.now
+
 User.pluck(:id).each do |user|
   num = rand(20) + 5
   FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
     descriptions = reviews.sample(num)
     rating = rand(5) + 1
     if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
-      Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+      new_review = Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
+      new_review.created_at = rand(begin_time..end_time)
+      new_review.save!
     end
   end
 end
