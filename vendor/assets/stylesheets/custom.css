@@ -1,6 +1,7 @@
 body {
   background-color: #232B2B;
   color: #FFFFFF;
+  padding-top: 40px;
 }
 
 a {
@@ -51,20 +52,31 @@ a:hover {
 
 /*INDEX PAGE*/
 
+.navbar {
+  margin: 0;
+}
+
+.navbar-right button {
+  margin: 10px 5px 0 0;
+}
+
 .navbar-brand {
   margin: 9px 0 -11px 0;
   padding: 0;
 }
 
 .welcome-image {
-  display: none;
-  height: 200px;
+
+  border-bottom: 2px solid #000000;
+  height: 300px;
   width: 100%;
   display: block;
-  background-image: image_tag('header.jpg') no-repeat;
+  background-image: url(/assets/header.jpg);
+  background-position: center;
 }
 
 .index-blades {
+  margin: 15px 0 0 0;
   width: 65%;
   float:left;
 }
@@ -97,6 +109,7 @@ img.review-thumb {
 }
 
 .welcome-right {
+  margin: 15px 0 0 0;
   float: left;
   margin-left: 2%;
   width: 33%;
@@ -129,7 +142,7 @@ img.review-thumb {
 /*FOOD TRUCK SHOW PAGE*/
 
 .food-truck-show-profile {
-  margin: 10px 0 15px 0;
+  margin: 35px 0 15px 0;
   overflow: auto;
 }
 

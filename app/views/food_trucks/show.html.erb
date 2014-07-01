@@ -13,7 +13,9 @@
     <div class='food-truck-review-blade'>
       <%= image_tag(r.user.profile_photo) %>
       <% r.rating.to_i.times do %>&#9733; <% end %>
-      <span class="orange"><%= r.user.first_name + " " + r.user.last_name %></span>
+      <span class="orange">
+        <%= r.user.first_name + " " + r.user.last_name %>
+      </span>
        at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
       <span class="yellow">Upvotes: <%= r.votes.where(vote: 'up').count %> / Downvotes:
       <%= r.votes.where(vote: 'down').count %><br></span>
