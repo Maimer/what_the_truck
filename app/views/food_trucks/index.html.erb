@@ -35,7 +35,7 @@
       <div class="latest-review">
         <%= image_tag(r.user.profile_photo) %>
         <span class="yellow">
-          <%= r.user.first_name %>
+          <%= r.user.first_name + " " + r.user.last_name %>
         </span><br>
         <% r.rating.times do %>&#9733;<% end %><br>
         <%= r.body %>
