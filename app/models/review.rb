@@ -32,4 +32,5 @@ class Review < ActiveRecord::Base
     self.food_truck.reviews.count
     self.food_truck.save
   end
+
 end
