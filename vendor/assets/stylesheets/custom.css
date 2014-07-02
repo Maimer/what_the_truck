@@ -1,6 +1,6 @@
 body {
   background-color: #232B2B;
-  color: #FFFFFF;
+  color: #AAAAAA;
   margin-top: 71px;
 }
 
@@ -185,6 +185,31 @@ img.review-thumb {
   height: 55px;
   width: 55px;
   margin: 0 5px 5px 0;
+}
+
+.vote {
+  float:right;
+}
+
+.vote img {
+  height: 28px;
+  width: 28px;
+  float: none;
+  border: none;
+}
+
+.stars {
+  margin-right: 5px;
+  overflow: auto;
+  display: inline;
+}
+
+.stars img {
+  height: 18px;
+  width: 18px;
+  border: none;
+  margin: 0 1px 1px 0;
+  padding: 0;
 }
 
 /*PAGINATION*/

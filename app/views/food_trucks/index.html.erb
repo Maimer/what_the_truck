@@ -5,7 +5,9 @@
         <h4>
           <%= image_tag(food_truck.truck_photo.url(:thumb)) %>
           <%= link_to food_truck.name, food_truck %> -
-          <% food_truck.average_rating.ceil.times do %>&#9733;<% end %>
+          <div class="stars">
+            <% food_truck.average_rating.ceil.times do %><%= image_tag('star.png') %><% end %>
+          </div>
           <% if food_truck.reviews.size != 0 %>
             <small>
               <%= link_to "#{food_truck.reviews.size} reviews", food_truck %>
@@ -14,7 +16,9 @@
         </h4>
         <% if food_truck.reviews.size != 0 %>
           <%= image_tag(food_truck.reviews.last.user.profile_photo, class: 'review-thumb') %>
-          <% food_truck.reviews.last.rating.times do %>&#9733;<% end %>
+          <div class="stars">
+            <% food_truck.reviews.last.rating.times do %><%= image_tag('star.png') %><% end %>
+          </div>
           <span class="yellow">
             <%= food_truck.reviews.last.user.first_name + " " + food_truck.reviews.last.user.last_name %>
           </span>
