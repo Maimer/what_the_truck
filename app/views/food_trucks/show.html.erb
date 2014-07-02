@@ -35,9 +35,10 @@
 
       <% review_users_up = []%>
       <% review_users_down = []%>
+
       <% r.votes.each do |v|%>
         <% if v.vote == 'up' %>
-        <% review_users_up << v.user_id %>
+          <% review_users_up << v.user_id %>
         <% else %>
           <% review_users_down << v.user_id %>
         <% end%>
