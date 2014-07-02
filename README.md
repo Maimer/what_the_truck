@@ -16,7 +16,7 @@ What The Truck?! includes a separate namespace for admins to manage content on t
 
 _Nokogiri_
 
-To pull in the location data for each truck, we used [Nokogiri](https://github.com/sparklemotion/nokogiri) to scrape truck information from the City of Boston website. We then referenced the food truck details against the current database of trucks. Finally, we plotted the location of the truck using the latitude/longitude and Google Maps API.
+To pull in the location data for each truck, we used [Nokogiri](https://github.com/sparklemotion/nokogiri) to scrape truck information from the City of Boston website. We then referenced the food truck details against the current database of trucks. Finally, we plotted the location of the truck using the latitude/longitude and Google Maps API.  This data is updated daily through a scheduled rake task.
 
 _CarrierWave/MiniMagick_
 
@@ -33,3 +33,11 @@ _Premailer_
 _Simple Form_
 
 We used [Simple Form](https://github.com/plataformatec/simple_form) for all forms on the site.
+
+### Front Page
+
+![Front Page](https://raw.githubusercontent.com/Maimer/what_the_truck/master/readme_images/front.png)
+
+### Sample Truck Page
+
+![Truck Page](https://raw.githubusercontent.com/Maimer/what_the_truck/master/readme_images/truck.png)
