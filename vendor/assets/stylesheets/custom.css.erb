@@ -67,7 +67,7 @@ a:hover {
 
 .jumbotron {
   margin-top: 0 0 15px 0;
-  background-image: url(/assets/header-overhead.jpg);
+  background-image: url(<%= asset_path('header-overhead.jpg') %>);
   background-position: center;
   background-repeat: none;
   color: #FFFFFF;
@@ -142,9 +142,10 @@ img.review-thumb {
 }
 
 .latest-review img {
+  border: 1px solid #FFF;
   float: left;
-  height: 55px;
-  width: 55px;
+  height: 50px;
+  width: 50px;
   margin: 0 5px 5px 0;
 }
 
@@ -171,6 +172,10 @@ img.review-thumb {
 .food-truck-show-reviews {
   width: 65%;
   float:left;
+}
+
+.food-truck-show-reviews h2 {
+  margin-top: 5px;
 }
 
 .food-truck-review-blade {
@@ -210,6 +215,23 @@ img.review-thumb {
   border: none;
   margin: 0 1px 1px 0;
   padding: 0;
+}
+
+.stars1 {
+  margin-right: 5px;
+  overflow: auto;
+  display: inline;
+}
+
+.stars1 img {
+  border: none;
+  margin: 0 1px 1px 0;
+  padding: 0;
+}
+
+.buttonright {
+  float: right;
+  margin: 5px 0 0 50px;
 }
 
 /*PAGINATION*/

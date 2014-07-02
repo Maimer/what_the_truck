@@ -6,11 +6,17 @@
 </div>
 
 <div class='food-truck-show-reviews'>
+  <%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck), class: 'btn btn-warning btn-lg buttonright' %>
   <h2 class="orange"><%= @food_truck.name %></h2>
+
   <%= link_to @food_truck.website, @food_truck.website %>
-  <br><br>
+  <div class="stars1">
+    <h4><% @food_truck.average_rating.round.times do %><%= image_tag('star.png') %><% end %>
+    (<%= @food_truck.average_rating.round(1) %>)</h4>
+  </div>
   <%= @food_truck.description %>
   <br><br>
+
 
   <iframe src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_KEY'] %>&q=<%= @location %>" width="300" height="300" frameborder="0" style="border:0"></iframe>
 </div>
@@ -31,14 +37,12 @@
   <%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck), class: 'btn btn-warning btn-lg' %>
   <br><br>
   <% @reviews.each do |r| %>
-
-
     <div class='food-truck-review-blade'>
-      <% if review_users_up.include?(current_user.id) %>
+      <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
         <div class="vote">
           <%= image_tag('up.png') %> <%= link_to image_tag('down-disabled.png'), review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
         </div>
-      <% elsif review_users_down.include?(current_user.id) %>
+      <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
         <div class="vote">
           <%= link_to image_tag('up-disabled.png'), review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> <%= image_tag('down.png') %>
         </div>
@@ -59,29 +63,6 @@
       <span class="yellow">Upvotes: <%= upvote %> / Downvotes:
       <%= downvote %><br></span>
       <%= r.body %>
-<<<<<<< HEAD
-      <br>
-
-      <% review_users_up = []%>
-      <% review_users_down = []%>
-
-      <% r.votes.each do |v|%>
-        <% if v.vote == 'up' %>
-          <% review_users_up << v.user_id %>
-        <% else %>
-          <% review_users_down << v.user_id %>
-        <% end%>
-      <% end%>
-      <% if review_users_up.include?(current_user.id) %>
-        Upvote / <%= link_to "Downvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
-      <% elsif review_users_down.include?(current_user.id) %>
-        <%= link_to "Upvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> / Downvote
-      <% else %>
-        <%= link_to "Upvote", review_votes_path(r, vote: { vote: "up" } ), method: :post %> /
-        <%= link_to "Downvote", review_votes_path(r, vote: { vote: "down" } ), method: :post %>
-      <% end %>
-=======
->>>>>>> 781723100990d70bc6c6b638976186c20a1b2961
     </div>
   <% end %>
   <%= paginate @food_truck, window: 2 %>

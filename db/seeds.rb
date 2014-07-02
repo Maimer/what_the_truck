@@ -73,14 +73,8 @@ food_trucks.each do |info|
   end
 end
 
-truck_photos = Dir.entries("#{Rails.root}/food_truck_images")
-
-truck_photos.each do |photo|
-  truck_photos.reject! { |photo| photo[-3..-1] != "jpg" && photo[-3..-1] != "png" }
-end
-
 FoodTruck.all.each_with_index do |truck, i|
-  truck.truck_photo.store!(File.open(File.join(Rails.root, "/food_truck_images/#{truck_photos[i]}")))
+  truck.truck_photo.store!(File.open(File.join(Rails.root, "/food_truck_images/#{i+1}.jpg")))
   truck.save!
 end
 
@@ -193,7 +187,10 @@ User.pluck(:id).each do |user|
   num = rand(20) + 5
   FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
     descriptions = reviews.sample(num)
-    rating = rand(5) + 1
+    rating = rand(6) + 1
+    if rating > 5
+      rating = 5
+    end
     if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
       new_review = Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
       new_review.created_at = rand(begin_time..end_time)
