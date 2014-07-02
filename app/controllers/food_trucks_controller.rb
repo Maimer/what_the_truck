@@ -8,6 +8,8 @@ class FoodTrucksController < ApplicationController
     else
       @food_trucks = FoodTruck.includes(reviews: :user).order(average_rating: :desc).page(params[:page])
     end
+    @reviews = Review.all.sample(5)
+    @jumbotron = true
   end
 
   def show
@@ -15,6 +17,7 @@ class FoodTrucksController < ApplicationController
     @food_truck = FoodTruck.includes(reviews: [:user, :votes]).order("reviews.votes_count desc").page(params[:page]).find(params[:id])
     # @food_truck = FoodTruck.includes(reviews: [:votes, :user]).find(params[:id])
     # @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
+
 
     @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
 

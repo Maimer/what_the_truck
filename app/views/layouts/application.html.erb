@@ -16,7 +16,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"><%= image_tag('title.png') %></a>
+        <a class="navbar-brand" href="/"><%= image_tag('title1.png') %></a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
@@ -25,13 +25,15 @@
         <ul class="nav navbar-nav navbar-right">
           <li>
             <%= simple_form_for :search, url: food_trucks_path(:index), html: {class: 'navbar-form'}, method: :get do |f| %>
-            <%= f.input :query, placeholder: "Search Trucks", label: false, input_html: { class:
+              <%= f.input :query, placeholder: "Search Trucks", label: false, input_html: { class:
           'form-control'} %>
             <% end %>
           </li>
           <% if user_signed_in? %>
-            <% if !current_user.profile_photo %>
+            <% if current_user.profile_photo != "" %>
               <li><%= image_tag current_user.profile_photo, class: "navbar-avatar" %></li>
+            <% else %>
+              <li><a><%= "Signed in as " + current_user.first_name + " " + current_user.last_name %></a></li>
             <% end %>
             <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
           <% else %>
@@ -43,13 +45,22 @@
     </div>
   </div>
 
-  <% if request.original_url == 'http://localhost:3000/' %>
-    <div class="welcome-image">
-
-    </div>
-  <% end %>
-
   <div class="container">
+    <% if @jumbotron %>
+      <div class="jumbotron">
+        <h1>your favorite truck stop</h1>
+        <h3>Search our listings or add a truck!</h3>
+        <p>
+          <% if user_signed_in? %>
+            <%= link_to 'Add a food truck', new_food_truck_path, class: 'btn btn-warning' %>
+        <% else %>
+            <%= link_to "Sign In", new_user_session_path, class: 'btn btn-lg btn-warning' %>
+            <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-lg btn-warning' %>
+        <% end %>
+        </p>
+      </div>
+    <% end %>
+
     <% if flash.any? %>
       <div class="alert alert-warning" role="alert">
         <strong>
@@ -66,6 +77,21 @@
     </div>
 
   </div>
+
+  <div class="container text-center">
+  <hr>
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="nav nav-pills nav-justified">
+                <li><a href="https://github.com/Maimer/what_the_truck">GitHub Repository</a></li>
+                <li><a href="https://github.com/Maimer/">Nick Lee</a></li>
+                <li><a href="https://github.com/saltys/">Chris Saltys</a></li>
+                <li><a href="https://github.com/briancox730/">Brian Cox</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
