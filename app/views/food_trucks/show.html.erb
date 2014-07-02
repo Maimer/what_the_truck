@@ -16,26 +16,6 @@
   </div>
   <%= @food_truck.description %>
   <br><br>
-
-
-  <iframe src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_KEY'] %>&q=<%= @location %>" width="300" height="300" frameborder="0" style="border:0"></iframe>
-</div>
-
-
-<div class='food-truck-show-reviews'>
-  <% @food_truck.reviews.each do |r| %>
-    <% upvote = 0 %>
-    <% downvote = 0 %>
-    <% r.votes.each do |v|%>
-      <% if v.vote == 'up' %>
-        <% upvote += 1 %>
-      <% else%>
-        <% downvote += 1 %>
-      <% end %>
-     <% end %>
-
-  <%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck), class: 'btn btn-warning btn-lg' %>
-  <br><br>
   <% @reviews.each do |r| %>
     <div class='food-truck-review-blade'>
       <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
@@ -60,12 +40,12 @@
         <%= r.user.first_name + " " + r.user.last_name %>
       </span>
        at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
-      <span class="yellow">Upvotes: <%= upvote %> / Downvotes:
-      <%= downvote %><br></span>
+      <span class="yellow">Upvotes: <%= r.votes.where(vote: 'up').count %> / Downvotes:
+      <%= r.votes.where(vote: 'down').count %><br></span>
       <%= r.body %>
     </div>
   <% end %>
-  <%= paginate @food_truck, window: 2 %>
+  <%= paginate @reviews, window: 2%>
 </div>
 
 <div class="right">

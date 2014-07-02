@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
       redirect_to @food_truck
     else
       flash.now[:notice] = "Your review was not succesfully submitted."
-      render 'food_trucks/new'
+      render :new
     end
   end
 

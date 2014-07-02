@@ -1,7 +1,21 @@
-<h3>Add A Review</h3>
 
-<%= simple_form_for([@food_truck, @review]) do |f| %>
-  <%= f.input :rating %>
-  <%= f.input :body %>
-  <%= f.button :submit %>
+
+<%= simple_form_for([@food_truck, @review], html: {class: 'form-signin'}) do |f| %>
+  <h3>Add A Review</h3>
+  <%= f.input :rating,
+              label: false,
+              placeholder: 'Rating',
+              required: true,
+              input_html: { min: 1, max: 5, class: 'form-control' } %>
+  <br>
+  <%= f.input :body,
+              label: false,
+              placeholder: 'Your Review...',
+              input_html: { rows: 7, class: 'form-control' } %>
+  <br>
+  <%= f.button :submit,
+              value: 'Create Review',
+              class: 'btn btn-lg btn-warning btn-block' %>
 <% end %>
+
+
