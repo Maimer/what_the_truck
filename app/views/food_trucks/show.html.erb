@@ -8,7 +8,10 @@
 <div class='food-truck-show-reviews'>
   <h2 class="orange"><%= @food_truck.name %></h2>
   <%= link_to @food_truck.website, @food_truck.website %>
-  <br><br>
+  <div class="stars1">
+    <h4><% @food_truck.average_rating.round.times do %><%= image_tag('star.png') %><% end %>
+    (<%= @food_truck.average_rating.round(1) %>)</h4>
+  </div>
   <%= @food_truck.description %>
   <br><br>
   <%= link_to "Create a New Review!", new_food_truck_review_path(@food_truck), class: 'btn btn-warning btn-lg' %>

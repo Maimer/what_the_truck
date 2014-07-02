@@ -187,7 +187,10 @@ User.pluck(:id).each do |user|
   num = rand(20) + 5
   FoodTruck.pluck(:id).sample(num).each_with_index do |truck, i|
     descriptions = reviews.sample(num)
-    rating = rand(5) + 1
+    rating = rand(6) + 1
+    if rating > 5
+      rating = 5
+    end
     if !Review.exists?(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
       new_review = Review.create!(rating: rating, body: descriptions[i][:description], food_truck_id: truck, user_id: user)
       new_review.created_at = rand(begin_time..end_time)
