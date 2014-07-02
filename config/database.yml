@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: what_the_truck_production
-  username: what_the_truck
   password: <%= ENV['WHAT_THE_TRUCK_DATABASE_PASSWORD'] %>

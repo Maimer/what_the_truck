@@ -11,9 +11,24 @@ class FoodTrucksController < ApplicationController
   end
 
   def show
+
     @food_truck = FoodTruck.includes(reviews: [:user, :votes]).order("reviews.votes_count desc").page(params[:page]).find(params[:id])
     # @food_truck = FoodTruck.includes(reviews: [:votes, :user]).find(params[:id])
     # @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
+
+    @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
+
+    meal = MealTime.get_meal_time
+
+    @location = Location.where(food_truck_id: @food_truck.id,
+                               day_of_week: Time.now.getlocal.strftime('%A'),
+                               time_of_day: meal)
+
+    if @location.size == 0
+      @location = "Boston,MA"
+    else
+      @location = @location.first.coordinates
+    end
   end
 
   def new
