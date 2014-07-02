@@ -15,24 +15,29 @@
   <br><br>
   <% @reviews.each do |r| %>
     <div class='food-truck-review-blade'>
+      <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
+        <div class="vote">
+          <%= image_tag('up-disabled.png') %> <%= link_to image_tag('down.png'), review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
+        </div>
+      <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
+        <div class="vote">
+          <%= link_to image_tag('up.png'), review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> <%= image_tag('up-disabled.png') %>
+        </div>
+      <% else %>
+        <div class="vote">
+          <%= link_to image_tag('up.png'), review_votes_path(r, vote: { vote: "up" } ), method: :post %>
+          <%= link_to image_tag('down.png'), review_votes_path(r, vote: { vote: "down" } ), method: :post %>
+        </div>
+      <% end %>
       <%= image_tag(r.user.profile_photo) %>
       <% r.rating.to_i.times do %>&#9733; <% end %>
       <span class="orange">
         <%= r.user.first_name + " " + r.user.last_name %>
       </span>
        at: <%= r.created_at.getlocal.strftime("%I:%M%p, %m/%d/%Y") %><br>
-      <span class="yellow"><span class="glyphicon glyphicon-search"></span> <%= r.votes.where(vote: 'up').count %> / Downvotes:
+      <span class="yellow">Upvotes: <%= r.votes.where(vote: 'up').count %> / Downvotes:
       <%= r.votes.where(vote: 'down').count %><br></span>
       <%= r.body %>
-      <br>
-      <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
-        Upvote / <%= link_to "Downvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
-      <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
-        <%= link_to "Upvote", review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> / Downvote
-      <% else %>
-        <%= link_to "Upvote", review_votes_path(r, vote: { vote: "up" } ), method: :post %> /
-        <%= link_to "Downvote", review_votes_path(r, vote: { vote: "down" } ), method: :post %>
-      <% end %>
     </div>
   <% end %>
   <%= paginate @reviews, window: 2%>
@@ -46,7 +51,6 @@
         <%= image_tag(t.truck_photo.url(:thumb)) %>
         <%= link_to t.name, t %> -
         <% t.average_rating.ceil.times do %>&#9733;<% end %>
-        <br>
         <%= t.description %>
       </div>
     <% end %>
