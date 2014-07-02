@@ -1,4 +1,6 @@
-## What The Truck ?!
+## What The Truck?!
+
+[Visit What The Truck?!](http://what-the-truck.herokuapp.com/)
 
 Made by [Brian Cox](https://github.com/briancox730), [Nicholas Lee](https://github.com/Maimer) and [Chris Saltys](https://github.com/saltys)
 
