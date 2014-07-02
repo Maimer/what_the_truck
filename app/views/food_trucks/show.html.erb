@@ -6,7 +6,7 @@
 </div>
 
 <div class='food-truck-show-reviews'>
-  <h2><%= @food_truck.name %></h2>
+  <h2 class="orange"><%= @food_truck.name %></h2>
   <%= link_to @food_truck.website, @food_truck.website %>
   <br><br>
   <%= @food_truck.description %>
@@ -51,8 +51,10 @@
     <% @food_trucks.each do |t| %>
       <div class="latest-review">
         <%= image_tag(t.truck_photo.url(:thumb)) %>
-        <%= link_to t.name, t %> -
-        <% t.average_rating.ceil.times do %>&#9733;<% end %>
+        <div class="stars">
+          <% t.average_rating.ceil.times do %><%= image_tag('star.png') %><% end %>
+        </div>
+        <%= link_to t.name, t %><br>
         <%= t.description %>
       </div>
     <% end %>
