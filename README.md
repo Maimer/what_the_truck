@@ -1,6 +1,6 @@
 ## What The Truck ?! README
 
-Made by Brian Cox, Nicholas Lee and Chris Saltys
+Made by [Brian Cox](https://github.com/briancox730), [Nicholas Lee](https://github.com/Maimer) and [Chris Saltys](https://github.com/saltys)
 
 ### Introduction
 
