@@ -74,7 +74,7 @@ food_trucks.each do |info|
 end
 
 FoodTruck.all.each_with_index do |truck, i|
-  truck.truck_photo.store!(File.open(File.join(Rails.root, "/food_truck_images/#{i}.jpg")))
+  truck.truck_photo.store!(File.open(File.join(Rails.root, "/food_truck_images/#{i+1}.jpg")))
   truck.save!
 end
 
