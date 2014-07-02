@@ -17,11 +17,11 @@
     <div class='food-truck-review-blade'>
       <% if r.votes.where(user_id: current_user, vote: 'up').size > 0 %>
         <div class="vote">
-          <%= image_tag('up-disabled.png') %> <%= link_to image_tag('down.png'), review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
+          <%= image_tag('up.png') %> <%= link_to image_tag('down-disabled.png'), review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "down" } ), method: :post %>
         </div>
       <% elsif r.votes.where(user_id: current_user, vote: 'down').size > 0 %>
         <div class="vote">
-          <%= link_to image_tag('up.png'), review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> <%= image_tag('up-disabled.png') %>
+          <%= link_to image_tag('up-disabled.png'), review_votes_path(r, r.votes.where(user_id: current_user).first.id, vote: { vote: "up" } ), method: :post %> <%= image_tag('down.png') %>
         </div>
       <% else %>
         <div class="vote">
