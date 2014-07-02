@@ -1,4 +1,4 @@
-## What The Truck ?! README
+## What The Truck ?!
 
 Made by [Brian Cox](https://github.com/briancox730), [Nicholas Lee](https://github.com/Maimer) and [Chris Saltys](https://github.com/saltys)
 
