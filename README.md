@@ -2,7 +2,7 @@
 
 Made by Brian Cox, Nicholas Lee and Chris Saltys
 
-**Introduction**
+### Introduction
 
 What The Truck?! is a food truck review site for trucks in Boston. It is intended to be a user-driven community with food truck ratings and detailed reviews.
 
@@ -10,7 +10,7 @@ Users may view a list of food trucks and information for each truck. Food trucks
 
 What The Truck?! includes a separate namespace for admins to manage content on the site. An admin may delete a truck or review if they wish.
 
-**Tools Used**
+### Tools Used
 
 _Nokogiri_
 
