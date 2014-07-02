@@ -16,7 +16,7 @@
           <%= image_tag(food_truck.reviews.last.user.profile_photo, class: 'review-thumb') %>
           <% food_truck.reviews.last.rating.times do %>&#9733;<% end %>
           <span class="yellow">
-            <%= food_truck.reviews.last.user.first_name %>
+            <%= food_truck.reviews.last.user.first_name + " " + food_truck.reviews.last.user.last_name %>
           </span>
           <br>
           <%= "#{food_truck.reviews.last.body.split('.')[0..3].join('.')}..." %>
@@ -28,33 +28,18 @@
   <% end %>
 </div>
 
-<div class="welcome-right">
-
-  <% if user_signed_in? %>
-    <div class="sign-in">
-      <h1>Did we miss a truck?</h1>
-      <br><br>
-      <%= link_to 'Add a food truck', new_food_truck_path, class: 'btn btn-warning btn-lg' %>
-    </div>
-
-  <% else %>
-    <div class="sign-in">
-      <h1>Come on in!</h1>
-      <h5>Sign up its free</h5>
-      <br><br>
-      <%= link_to "Sign In", new_user_session_path, class: 'btn btn-warning' %>
-      <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-warning' %>
-    </div>
-  <% end %>
-
-  <div class="latest-review">
-    <% if @food_trucks.first.reviews.size != 0 %>
-      <%= image_tag(@food_trucks.first.reviews.last.user.profile_photo) %>
-      <span class="yellow">
-        <%= @food_trucks.first.reviews.last.user.first_name %>
-      </span><br>
-      <% @food_trucks.first.reviews.last.rating.times do %>&#9733;<% end %><br>
-      <%= @food_trucks.first.reviews.last.body %>
+<div class="right">
+  <h3>Latest Reviews</h3>
+  <% if @reviews.size != 0 %>
+    <% @reviews.each do |r| %>
+      <div class="latest-review">
+        <%= image_tag(r.user.profile_photo) %>
+        <span class="yellow">
+          <%= r.user.first_name + " " + r.user.last_name %>
+        </span><br>
+        <% r.rating.times do %>&#9733;<% end %><br>
+        <%= r.body %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
 </div>

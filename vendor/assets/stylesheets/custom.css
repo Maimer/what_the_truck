@@ -1,7 +1,7 @@
 body {
   background-color: #232B2B;
   color: #FFFFFF;
-  padding-top: 40px;
+  margin-top: 71px;
 }
 
 a {
@@ -53,7 +53,7 @@ a:hover {
 /*INDEX PAGE*/
 
 .navbar {
-  margin: 0;
+  margin: 0 0 15px 0;
 }
 
 .navbar-right button {
@@ -65,18 +65,24 @@ a:hover {
   padding: 0;
 }
 
-.welcome-image {
-
-  border-bottom: 2px solid #000000;
-  height: 300px;
-  width: 100%;
-  display: block;
-  background-image: url(/assets/header.jpg);
+.jumbotron {
+  margin-top: 0 0 15px 0;
+  background-image: url(/assets/header-overhead.jpg);
   background-position: center;
+  background-repeat: none;
+  color: #FFFFFF;
+  text-shadow: 4px 4px 5px rgba(0, 0, 0, 1);
+}
+
+.jumbotron a {
+  text-shadow: none;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.5);
 }
 
 .index-blades {
-  margin: 15px 0 0 0;
+  margin: 0;
   width: 65%;
   float:left;
 }
@@ -108,22 +114,31 @@ img.review-thumb {
   width: 50px;
 }
 
-.welcome-right {
-  margin: 15px 0 0 0;
+.right {
+  margin: 0;
   float: left;
   margin-left: 2%;
   width: 33%;
   text-align: center;
 }
 
-.welcome-right h1 {
+.right h3 {
+  margin-top: 0;
   color: #DC3D24;
 }
 
-.welcome-right .sign-in {
+.right .sign-in {
   margin-bottom: 15px;
   border-top: 1px solid #FFFFFF;
   padding: 15px 0 15px 0;
+}
+
+.latest-review {
+  border-top: 1px solid #FFFFFF;
+  text-align: left;
+  margin-top: 10px;
+  padding-top: 10px;
+  overflow: auto;
 }
 
 .latest-review img {
@@ -133,31 +148,24 @@ img.review-thumb {
   margin: 0 5px 5px 0;
 }
 
-.latest-review {
-  text-align: left;
-  border-top: 1px solid #FFFFFF;
-  padding-top: 10px;
-}
-
 /*FOOD TRUCK SHOW PAGE*/
 
 .food-truck-show-profile {
-  margin: 35px 0 15px 0;
+  margin: 0 0 15px 0;
   overflow: auto;
 }
 
-.food-truck-show-profile .btn {
-  float: right;
-}
-
 .food-truck-show-profile h2 {
-  margin: 0 0 0 10px;
   color: #DC3D24;
 }
 
-.food-truck-show-profile img {
-  float: left;
+.food-truck-show-profile .map iframe {
+  float: right;
+}
+
+.food-truck-show-profile .map img {
   margin: 0 10px 10px 0;
+  border: 1px solid #000;
 }
 
 .food-truck-show-reviews {

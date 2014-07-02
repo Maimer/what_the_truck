@@ -8,10 +8,12 @@ class FoodTrucksController < ApplicationController
     else
       @food_trucks = FoodTruck.includes(reviews: :user).order(average_rating: :desc).page params[:page]
     end
+    @reviews = Review.all.sample(5)
   end
 
   def show
     @food_truck = FoodTruck.find(params[:id])
+    @food_trucks = FoodTruck.all.sample(4)
     @reviews = @food_truck.reviews.order(votes_count: :desc).page params[:page]
 
     meal = MealTime.get_meal_time
