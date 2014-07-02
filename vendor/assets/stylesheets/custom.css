@@ -198,6 +198,20 @@ img.review-thumb {
   border: none;
 }
 
+.stars {
+  margin-right: 5px;
+  overflow: auto;
+  display: inline;
+}
+
+.stars img {
+  height: 18px;
+  width: 18px;
+  border: none;
+  margin: 0 1px 1px 0;
+  padding: 0;
+}
+
 /*PAGINATION*/
 
 .pagination .active > a{
