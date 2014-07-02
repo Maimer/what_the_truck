@@ -16,6 +16,9 @@
 /tmp
 
 # Ignore uploaded files in test/development
+/profile_images
+/truck_images
+/website_images
 /public/uploads
 
 .env
