@@ -4,9 +4,9 @@ class FoodTrucksController < ApplicationController
 
   def index
     if params[:search]
-      @food_trucks = FoodTruck.includes(reviews: :user).search(params[:search][:query]).page params[:page]
+      @food_trucks = FoodTruck.includes(reviews: :user).search(params[:search][:query]).page(params[:page])
     else
-      @food_trucks = FoodTruck.includes(reviews: :user).order(average_rating: :desc).page params[:page]
+      @food_trucks = FoodTruck.includes(reviews: :user).order(average_rating: :desc).page(params[:page])
     end
     @reviews = Review.all.sample(5)
   end
