@@ -9,7 +9,7 @@ profile_photos.each do |photo|
   profile_photos.reject! { |photo| photo[-3..-1] != "jpg" && photo[-3..-1] != "png" }
 end
 
-profile_photos.size.times do
+profile_photos.size.times do |i|
   User.create({
     first_name: Randgen.first_name(length: rand(7) + 4),
     last_name: Randgen.last_name(length: rand(7) + 4),
