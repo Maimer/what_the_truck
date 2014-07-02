@@ -41,6 +41,7 @@
         <div class="stars">
           <% r.rating.times do %><%= image_tag('star.png') %><% end %>
         </div>
+        <%= link_to r.food_truck.name, food_truck_path(r.food_truck) %><br>
         <span class="yellow">
           <%= r.user.first_name + " " + r.user.last_name %>
         </span><br>

@@ -9,6 +9,7 @@ class FoodTrucksController < ApplicationController
       @food_trucks = FoodTruck.includes(reviews: :user).order(average_rating: :desc).page(params[:page])
     end
     @reviews = Review.all.sample(5)
+    @jumbotron = true
   end
 
   def show
