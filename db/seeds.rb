@@ -74,7 +74,10 @@ food_trucks.each do |info|
 end
 
 truck_photos = Dir.entries("#{Rails.root}/food_truck_images")
-truck_photos.shift(2)
+
+truck_photos.each do |photo|
+  truck_photos.reject! { |photo| photo[-3..-1] != "jpg" && photo[-3..-1] != "png" }
+end
 
 FoodTruck.all.each_with_index do |truck, i|
   truck.truck_photo.store!(File.open(File.join(Rails.root, "/food_truck_images/#{truck_photos[i]}")))
