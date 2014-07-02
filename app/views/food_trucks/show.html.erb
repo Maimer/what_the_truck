@@ -31,7 +31,7 @@
       <% end %>
       <%= image_tag(r.user.profile_photo) %>
       <div class="stars">
-        <% r.rating.to_i.times do %><%= image_tag('star.png') %> <% end %>
+        <% r.rating.to_i.times do %><%= image_tag('star.png') %><% end %>
       </div>
       <span class="orange">
         <%= r.user.first_name + " " + r.user.last_name %>
