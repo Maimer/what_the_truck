@@ -1,4 +1,4 @@
-**What The Truck ?! README**
+## What The Truck ?! README
 
 Made by Brian Cox, Nicholas Lee and Chris Saltys
 
