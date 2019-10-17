@@ -4,7 +4,7 @@
 
 Made by [Brian Cox](https://github.com/briancox730), [Nicholas Lee](https://github.com/Maimer) and [Chris Saltys](https://github.com/saltys)
 
-### Introduction
+## Introduction
 
 What The Truck?! is a food truck review site for trucks in Boston. It is intended to be a user-driven community with food truck ratings and detailed reviews.
 
@@ -12,7 +12,7 @@ Users may view a list of food trucks and information for each truck. Food trucks
 
 What The Truck?! includes a separate namespace for admins to manage content on the site. An admin may delete a truck or review if they wish.
 
-### Tools Used
+## Tools Used
 
 _Nokogiri_
 
@@ -34,10 +34,10 @@ _Simple Form_
 
 We used [Simple Form](https://github.com/plataformatec/simple_form) for all forms on the site.
 
-### Front Page
+## Front Page
 
 ![Front Page](https://raw.githubusercontent.com/Maimer/what_the_truck/master/readme_images/front.png)
 
-### Sample Truck Page
+## Sample Truck Page
 
 ![Truck Page](https://raw.githubusercontent.com/Maimer/what_the_truck/master/readme_images/truck.png)
